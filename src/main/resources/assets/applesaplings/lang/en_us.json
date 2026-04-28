@@ -1,0 +1,15 @@
+{
+  "itemGroup.applesaplings": "Apple Saplings",
+  "block.applesaplings.example_block": "Example Block",
+  "item.applesaplings.example_item": "Example Item",
+
+  "applesaplings.configuration.title": "Apple Saplings Configs",
+  "applesaplings.configuration.section.applesaplings.common.toml": "Apple Saplings Configs",
+  "applesaplings.configuration.section.applesaplings.common.toml.title": "Apple Saplings Configs",
+  "applesaplings.configuration.items": "Item List",
+  "applesaplings.configuration.logDirtBlock": "Log Dirt Block",
+  "applesaplings.configuration.magicNumberIntroduction": "Magic Number Text",
+  "applesaplings.configuration.magicNumber": "Magic Number",
+
+  "block.applesaplings.applewood_planks": "Applewood Planks"
+}
