@@ -9,7 +9,5 @@
   "applesaplings.configuration.items": "Item List",
   "applesaplings.configuration.logDirtBlock": "Log Dirt Block",
   "applesaplings.configuration.magicNumberIntroduction": "Magic Number Text",
-  "applesaplings.configuration.magicNumber": "Magic Number",
-
-  "block.applesaplings.applewood_planks": "Applewood Planks"
+  "applesaplings.configuration.magicNumber": "Magic Number"
 }

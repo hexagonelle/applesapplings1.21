@@ -1,10 +1,9 @@
 package net.hexagonelle.applesaplings.items;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
+import net.hexagonelle.applesaplings.blocks.ModBlocks;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,21 +24,26 @@ public class ItemRegistry {
 	// Creates a hashmap so that we can refer to a RegistryObject by a string
 	public static final HashMap<String, DeferredItem<Item>> ITEM_MAP = new HashMap<>();
 
+	// This method will register all the items listed in ModItems
+	static {
+		ModItems.init();
+	}
+
 	// METHODS TO REGISTER ITEMS //
 
 	// registers an item and places the corresponding DeferredItem in the HashMap by itemId
-	public static void registerItem(
+	public static DeferredItem<Item> registerItem(
 		String itemId,
 		Supplier<Item> itemSupplier
 	){
 		DeferredItem<Item> deferredItem = ITEMS.register(itemId,itemSupplier);
-		ITEM_MAP.put(itemId, deferredItem);
+		return ITEM_MAP.put(itemId, deferredItem);
 	}
 
 	public static void registerBlockItem(
-		String itemId
+		String blockId
 	){
-		registerItem(itemId,()-> ItemSuppliers.createBlockItem(itemId));
+		registerItem(blockId,()-> ItemSuppliers.createBlockItem(blockId));
 	}
 
 }
