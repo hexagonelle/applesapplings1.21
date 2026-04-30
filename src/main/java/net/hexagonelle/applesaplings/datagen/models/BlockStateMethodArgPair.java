@@ -1,8 +1,6 @@
 package net.hexagonelle.applesaplings.datagen.models;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BlockStateMethodArgPair {
 
@@ -35,8 +33,12 @@ public class BlockStateMethodArgPair {
 		PLANKS,
 		WOOD_STAIRS,
 		WOOD_SLAB,
-		FENCE,
-		FENCE_GATE
+		WOOD_FENCE,
+		WOOD_FENCE_GATE,
+		WOOD_DOOR,
+		WOOD_TRAPDOOR,
+		WOOD_PRESSURE_PLATE,
+		WOOD_BUTTON
 	}
 
 	public static BlockStateMethodArgPair storeBlockItemArgs(String blockId){
@@ -74,5 +76,23 @@ public class BlockStateMethodArgPair {
 	}
 	public static BlockStateMethodArgPair storeWoodSlabBlockArgs(String woodType){
 		return new BlockStateMethodArgPair(blockStateMethods.WOOD_SLAB,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodFenceBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_FENCE,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodFenceGateBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_FENCE_GATE,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodDoorBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_DOOR,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodTrapdoorBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_TRAPDOOR,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodPressurePlateArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_PRESSURE_PLATE,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeWoodButtonArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.WOOD_BUTTON,List.of(woodType));
 	}
 }

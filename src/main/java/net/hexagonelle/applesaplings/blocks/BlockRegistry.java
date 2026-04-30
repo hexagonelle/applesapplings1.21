@@ -100,6 +100,7 @@ public class BlockRegistry {
 
 		String strippedLogId = "stripped_" + woodTypeId + "_log";
 		String strippedWoodId = "stripped_" + woodTypeId + "_wood";
+		String planksId = woodTypeId + "_planks";
 
 		registerBlockWithItem(
 			strippedLogId,
@@ -130,7 +131,7 @@ public class BlockRegistry {
 			creativeTabId
 		);
 		registerBlockWithItem(
-			woodTypeId + "_planks",
+			planksId,
 			woodTypeName + " Planks",
 			BlockSuppliers::createPlanks,
 			BlockStateMethodArgPair.storePlanksBlockArgs(woodTypeId),
@@ -143,33 +144,61 @@ public class BlockRegistry {
 			BlockStateMethodArgPair.storeLeavesBlockArgs(woodTypeId),
 			creativeTabId
 		);
-//		registerBlockWithItem(
-//			woodTypeId + "_stairs",
-//			woodTypeName + " Stairs",
-//			() -> createWoodStairBlock(woodTypeId),
-//			WOOD_STAIRS,
-//			creativeTabId
-//		);
-//		registerBlockWithItem(
-//			woodTypeId + "_slab",
-//			woodTypeName + " Slab",
-//			BlockSuppliers::createWoodSlabBlock,
-//			WOOD_SLAB,
-//			creativeTabId
-//		);
-//		registerBlockWithItem(
-//			woodTypeId + "_fence",
-//			woodTypeName + " Fence",
-//			BlockSuppliers::createWoodFenceBlock,
-//			FENCE,
-//			creativeTabId
-//		);
-//		registerBlockWithItem(
-//			woodTypeId + "_fence_gate",
-//			woodTypeName + " Fence Gate",
-//			BlockSuppliers::createWoodFenceGateBlock,
-//			FENCE_GATE,
-//			creativeTabId
-//		);
+		registerBlockWithItem(
+			woodTypeId + "_stairs",
+			woodTypeName + " Stairs",
+			() -> createWoodStairBlock(planksId),
+			BlockStateMethodArgPair.storeWoodStairsBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_slab",
+			woodTypeName + " Slab",
+			BlockSuppliers::createWoodSlabBlock,
+			BlockStateMethodArgPair.storeWoodSlabBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_fence",
+			woodTypeName + " Fence",
+			BlockSuppliers::createWoodFenceBlock,
+			BlockStateMethodArgPair.storeWoodFenceBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_fence_gate",
+			woodTypeName + " Fence Gate",
+			BlockSuppliers::createWoodFenceGateBlock,
+			BlockStateMethodArgPair.storeWoodFenceGateBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_door",
+			woodTypeName + " Door",
+			BlockSuppliers::createWoodDoorBlock,
+			BlockStateMethodArgPair.storeWoodDoorBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_trapdoor",
+			woodTypeName + " Trapdoor",
+			BlockSuppliers::createWoodTrapDoorBlock,
+			BlockStateMethodArgPair.storeWoodTrapdoorBlockArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_pressure_plate",
+			woodTypeName + " Pressure Plate",
+			BlockSuppliers::createWoodPressurePlate,
+			BlockStateMethodArgPair.storeWoodPressurePlateArgs(woodTypeId),
+			creativeTabId
+		);
+		registerBlockWithItem(
+			woodTypeId + "_button",
+			woodTypeName + " Button",
+			BlockSuppliers::createWoodButton,
+			BlockStateMethodArgPair.storeWoodButtonArgs(woodTypeId),
+			creativeTabId
+		);
 	}
 }

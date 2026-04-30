@@ -2,7 +2,6 @@ package net.hexagonelle.applesaplings.datagen.models;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.blocks.BlockRegistry;
-import net.hexagonelle.applesaplings.blocks.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -43,8 +42,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	}
 
 	public static String blockPathName(String blockId){return "block/" + blockId;}
+	public static String blockPathName(String namespace, String blockId){
+		return namespace + ":block/" + blockId;
+	}
+
 	public static String blockPathNameWithState(String blockId, String state){
-		return blockPathName(blockId) + state;
+		return blockPathName(AppleSaplings.MODID, blockId) + state;
 	}
 
 	private ResourceLocation blockResource(String blockId) {
@@ -184,13 +187,44 @@ public class ModBlockStateProvider extends BlockStateProvider {
 			(FenceGateBlock) BlockRegistry.BLOCK_MAP.get(woodType + "_fence_gate").get(),
 			blockTexture(BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get())
 		);
+
+	}public void customWoodDoor(String woodType){
+		String doorId = woodType + "_door";
+		doorBlockWithRenderType(
+			(DoorBlock) BlockRegistry.BLOCK_MAP.get(doorId).get(),
+			blockResourceWithState(doorId, "_bottom"),
+			blockResourceWithState(doorId, "_top"),
+			"cutout"
+		);
+	}
+
+	public void customWoodTrapdoor(String woodType){
+		String trapdoorId = woodType + "_trapdoor";
+		trapdoorBlockWithRenderType(
+			(TrapDoorBlock) BlockRegistry.BLOCK_MAP.get(trapdoorId).get(),
+			blockResource(trapdoorId),
+			true, "cutout"
+		);
+	}
+
+	public void customButton(String woodType){
+		buttonBlock(
+			(ButtonBlock) BlockRegistry.BLOCK_MAP.get(woodType + "_button").get(),
+			blockTexture(BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get())
+		);
+	}
+
+	public void customPressurePlate(String woodType){
+		pressurePlateBlock(
+			(PressurePlateBlock) BlockRegistry.BLOCK_MAP.get(woodType + "_pressure_plate").get(),
+			blockTexture(BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get())
+		);
 	}
 
 	@Override
 	protected void registerStatesAndModels() {
 		for (Map.Entry<String, BlockStateMethodArgPair> set :
 			blockBlockstateMap.entrySet()){
-			String blockId = set.getKey();
 			BlockStateMethodArgPair methodArgPair = set.getValue();
 			BlockStateMethodArgPair.blockStateMethods method = methodArgPair.getMethod();
 			List<String> argsList = methodArgPair.getArguments();
@@ -226,11 +260,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
 				case WOOD_SLAB:
 					customWoodSlab(argsList.getFirst());
 					break;
-				case FENCE:
+				case WOOD_FENCE:
 					customFence(argsList.getFirst());
 					break;
-				case FENCE_GATE:
+				case WOOD_FENCE_GATE:
 					customFenceGate(argsList.getFirst());
+					break;
+				case WOOD_DOOR:
+					customWoodDoor(argsList.getFirst());
+					break;
+				case WOOD_TRAPDOOR:
+					customWoodTrapdoor(argsList.getFirst());
+					break;
+				case WOOD_BUTTON:
+					customButton(argsList.getFirst());
+					break;
+				case WOOD_PRESSURE_PLATE:
+					customPressurePlate(argsList.getFirst());
 					break;
 				default:
 					cubeBlockWithItem(argsList.getFirst());

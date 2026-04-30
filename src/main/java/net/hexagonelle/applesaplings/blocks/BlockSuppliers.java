@@ -95,26 +95,13 @@ public class BlockSuppliers {
 			}
 		};
 	}public static Block createWoodStairBlock(String baseBlockString){
-		return new StairBlock(BlockRegistry.BLOCK_MAP.get("baseBlockString").get().defaultBlockState(),
+		return new StairBlock(BlockRegistry.BLOCK_MAP.get(baseBlockString).get().defaultBlockState(),
 			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS));
 	}
 
 	public static Block createWoodSlabBlock(){
 		return new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB));
 	}
-
-//	public static Block createWoodButton(){
-//		return new ButtonBlock(
-//			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_BUTTON),
-//			BlockSetType.OAK, 10, true);
-//	}
-
-//	public static Block createWoodPressurePlate(){
-//		return new PressurePlateBlock(
-//			PressurePlateBlock.Sensitivity.EVERYTHING,
-//			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.OAK
-//		);
-//	}
 
 	public static Block createWoodFenceBlock(){
 		return new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
@@ -127,12 +114,33 @@ public class BlockSuppliers {
 		);
 	}
 
-//	public static Block createWoodDoorBlock(){
-//		return new DoorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR).noOcclusion(), BlockSetType.OAK);
-//	}
+	public static Block createWoodDoorBlock(){
+		return new DoorBlock(
+			BlockSetType.OAK,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR).noOcclusion()
+		);
+	}
 
-//	public static Block createWoodTrapDoorBlock() {
-//		return new TrapDoorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR).noOcclusion(), BlockSetType.OAK);
-//	}
+	public static Block createWoodTrapDoorBlock() {
+		return new TrapDoorBlock(
+			BlockSetType.OAK,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR).noOcclusion()
+		);
+	}
+
+	public static Block createWoodButton(){
+		return new ButtonBlock(
+			BlockSetType.OAK,
+			10,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_BUTTON)
+		);
+	}
+
+	public static Block createWoodPressurePlate(){
+		return new PressurePlateBlock(
+			BlockSetType.OAK,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)
+		);
+	}
 
 }
