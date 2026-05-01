@@ -2,6 +2,7 @@ package net.hexagonelle.applesaplings.datagen.lang;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.hexagonelle.applesaplings.datagen.models.ModBlockStateProvider.blockFromId;
+import static net.hexagonelle.applesaplings.datagen.models.ModItemModelProvider.itemFromId;
 
 public class ModLanguageProvider extends LanguageProvider {
 	public ModLanguageProvider(PackOutput output, String modid, String locale) {
@@ -16,6 +18,7 @@ public class ModLanguageProvider extends LanguageProvider {
 	}
 
 	public static final Map<String, String> blockLangMap = new HashMap<>();
+	public static final Map<String, String> itemLangMap = new HashMap<>();
 	public static final Map<String, String> creativeTabLangMap = new HashMap<>();
 
 
@@ -25,7 +28,15 @@ public class ModLanguageProvider extends LanguageProvider {
 	) {
 		blockLangMap.put(blockId, name);
 	}
-	// registers a block and places the corresponding DeferredBlock in the HashMap by blockId
+
+	public static void assignItemNames(
+		String itemId,
+		String name
+	) {
+		itemLangMap.put(itemId, name);
+	}
+
+
 	public static void assignCreativeTabNames(
 		String creativeTabId,
 		String name
@@ -36,6 +47,11 @@ public class ModLanguageProvider extends LanguageProvider {
 	public void blockName(String blockId, String name){
 		Block block = blockFromId(blockId);
 		addBlock(()->block,name);
+	}
+
+	public void itemName(String itemId, String name){
+		Item item = itemFromId(itemId);
+		addItem(()->item,name);
 	}
 
 	public void tabName(String tabId, String name){
@@ -50,6 +66,13 @@ public class ModLanguageProvider extends LanguageProvider {
 			String blockId = set.getKey();
 			String name = set.getValue();
 			blockName(blockId, name);
+		}
+
+		for (Map.Entry<String, String> set :
+			itemLangMap.entrySet()){
+			String itemId = set.getKey();
+			String name = set.getValue();
+			itemName(itemId, name);
 		}
 
 		for (Map.Entry<String, String> set :

@@ -21,5 +21,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
 		tag(BlockTags.FENCES).add(BLOCK_MAP.get("applewood_fence").get());
 		tag(BlockTags.FENCE_GATES).add(BLOCK_MAP.get("applewood_fence_gate").get());
+		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_sign").get());
+		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_wall_sign").get());
 	}
 }

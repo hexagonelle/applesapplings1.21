@@ -23,10 +23,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		super(output, modid, exFileHelper);
 	}
 
-
-
-	public static final Map<BlockStateMethodArgPair.blockStateMethods, List<String>> methodArgsMap = new HashMap<>();
-
 	public static final Map<String, BlockStateMethodArgPair> blockBlockstateMap = new HashMap<>();
 
 	// registers a block and places the corresponding DeferredBlock in the HashMap by blockId
@@ -221,6 +217,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		);
 	}
 
+	public void customSign(String woodType){
+		Block standingSign = BLOCK_MAP.get(woodType + "_sign").get();
+		Block wallSign = BLOCK_MAP.get(woodType + "_wall_sign").get();
+		ResourceLocation texture = blockTexture(BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get());
+		signBlock((StandingSignBlock) standingSign, (WallSignBlock) wallSign,texture);
+	}
+
+	public void customHangingSign(String woodType){
+		Block ceilingHangingSign = BLOCK_MAP.get(woodType + "hanging_sign").get();
+		Block wallHangingSign = BLOCK_MAP.get(woodType + "_wall_hanging_sign").get();
+		ResourceLocation texture = blockTexture(BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get());
+		hangingSignBlock((CeilingHangingSignBlock) ceilingHangingSign, (WallHangingSignBlock) wallHangingSign,texture);
+	}
+
 	@Override
 	protected void registerStatesAndModels() {
 		for (Map.Entry<String, BlockStateMethodArgPair> set :
@@ -277,6 +287,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 					break;
 				case WOOD_PRESSURE_PLATE:
 					customPressurePlate(argsList.getFirst());
+					break;
+				case SIGN:
+					customSign(argsList.getFirst());
+					break;
+				case HANGING_SIGN:
+					customHangingSign(argsList.getFirst());
 					break;
 				default:
 					cubeBlockWithItem(argsList.getFirst());

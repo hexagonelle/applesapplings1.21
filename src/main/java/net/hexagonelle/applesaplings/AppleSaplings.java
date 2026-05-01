@@ -1,9 +1,17 @@
 package net.hexagonelle.applesaplings;
 
 import net.hexagonelle.applesaplings.blocks.BlockRegistry;
+import net.hexagonelle.applesaplings.blocks.blockentities.BlockEntityTypeRegistry;
 import net.hexagonelle.applesaplings.creativetabs.CreativeTabRegistry;
 import net.hexagonelle.applesaplings.items.ItemRegistry;
-import net.minecraft.world.item.*;
+import net.hexagonelle.applesaplings.util.woodtypes.ModWoodTypes;
+import net.hexagonelle.applesaplings.util.woodtypes.WoodTypeRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -39,6 +47,8 @@ public class AppleSaplings {
         ItemRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CreativeTabRegistry.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so block entities get registered
+        BlockEntityTypeRegistry.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
@@ -67,5 +77,22 @@ public class AppleSaplings {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    @EventBusSubscriber(modid = MODID,value = Dist.CLIENT)
+    public static class ClientModEvents{
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+
+            Sheets.addWoodType(WoodTypeRegistry.WOODTYPE_MAP.get("applewood"));
+
+////        EntityRenderers.register(
+////          ModEntities.MOD_BOAT.get(),
+////          context -> new ModBoatRenderer(context, false));
+////        EntityRenderers.register(
+////          ModEntities.MOD_CHEST_BOAT.get(),
+////          context -> new ModBoatRenderer(context, true));
+
+        }
     }
 }

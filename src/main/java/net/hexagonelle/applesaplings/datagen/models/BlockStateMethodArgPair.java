@@ -38,7 +38,9 @@ public class BlockStateMethodArgPair {
 		WOOD_DOOR,
 		WOOD_TRAPDOOR,
 		WOOD_PRESSURE_PLATE,
-		WOOD_BUTTON
+		WOOD_BUTTON,
+		SIGN,
+		HANGING_SIGN
 	}
 
 	public static BlockStateMethodArgPair storeBlockItemArgs(String blockId){
@@ -94,5 +96,11 @@ public class BlockStateMethodArgPair {
 	}
 	public static BlockStateMethodArgPair storeWoodButtonArgs(String woodType){
 		return new BlockStateMethodArgPair(blockStateMethods.WOOD_BUTTON,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeSignBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.SIGN,List.of(woodType));
+	}
+	public static BlockStateMethodArgPair storeHangingBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.HANGING_SIGN,List.of(woodType));
 	}
 }

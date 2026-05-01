@@ -1,7 +1,7 @@
 package net.hexagonelle.applesaplings.items;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.blocks.ModBlocks;
+import net.hexagonelle.applesaplings.datagen.models.ItemModelMethodArgPair;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -9,6 +9,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.HashMap;
 import java.util.function.Supplier;
+
+import static net.hexagonelle.applesaplings.creativetabs.CreativeTabRegistry.ITEM_MODTAB_MAP;
+import static net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider.assignItemNames;
+import static net.hexagonelle.applesaplings.datagen.models.ModItemModelProvider.assignItemModel;
 
 public class ItemRegistry {
 
@@ -32,18 +36,54 @@ public class ItemRegistry {
 	// METHODS TO REGISTER ITEMS //
 
 	// registers an item and places the corresponding DeferredItem in the HashMap by itemId
-	public static DeferredItem<Item> registerItem(
+	public static void registerItem(
 		String itemId,
 		Supplier<Item> itemSupplier
 	){
 		DeferredItem<Item> deferredItem = ITEMS.register(itemId,itemSupplier);
-		return ITEM_MAP.put(itemId, deferredItem);
+		ITEM_MAP.put(itemId, deferredItem);
 	}
 
-	public static void registerBlockItem(
-		String blockId
+	public static void registerItem(
+		String itemId,
+		Supplier<Item> itemSupplier,
+		ItemModelMethodArgPair itemModelMethodArgPair,
+		String creativeTabId
 	){
+		DeferredItem<Item> deferredItem = ITEMS.register(itemId,itemSupplier);
+		ITEM_MAP.put(itemId, deferredItem);
+		assignItemModel(itemId, itemModelMethodArgPair);
+		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);
+	}
+
+	public static void registerItem(
+		String itemId,
+		String name,
+		Supplier<Item> itemSupplier,
+		ItemModelMethodArgPair itemModelMethodArgPair,
+		String creativeTabId
+	){
+		DeferredItem<Item> deferredItem = ITEMS.register(itemId,itemSupplier);
+		ITEM_MAP.put(itemId, deferredItem);
+		assignItemModel(itemId, itemModelMethodArgPair);
+		assignItemNames(itemId,name);
+		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);
+	}
+
+	public static void registerBlockItem(String blockId){
 		registerItem(blockId,()-> ItemSuppliers.createBlockItem(blockId));
+	}
+
+	public static void registerSignItem(
+		String woodType,
+		String creativeTabId
+	){
+		registerItem(
+			woodType + "_sign",
+			() -> ItemSuppliers.createSignItem(woodType),
+			ItemModelMethodArgPair.storeSignItemArgs(woodType),
+			creativeTabId
+			);
 	}
 
 }

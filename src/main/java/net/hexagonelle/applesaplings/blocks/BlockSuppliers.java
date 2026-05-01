@@ -1,5 +1,7 @@
 package net.hexagonelle.applesaplings.blocks;
 
+import net.hexagonelle.applesaplings.blocks.custom.ModStandingSignBlock;
+import net.hexagonelle.applesaplings.blocks.custom.ModWallSignBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -9,6 +11,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import org.jetbrains.annotations.NotNull;
+
+import static net.hexagonelle.applesaplings.util.woodtypes.WoodTypeRegistry.WOODTYPE_MAP;
 
 public class BlockSuppliers {
 
@@ -109,7 +113,7 @@ public class BlockSuppliers {
 
 	public static Block createWoodFenceGateBlock(){
 		return new FenceGateBlock(
-			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE),
 			SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE
 		);
 	}
@@ -140,6 +144,34 @@ public class BlockSuppliers {
 		return new PressurePlateBlock(
 			BlockSetType.OAK,
 			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)
+		);
+	}
+
+	public static Block createStandingSign(String woodTypeId){
+		return new ModStandingSignBlock(
+			WOODTYPE_MAP.get(woodTypeId),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)
+		);
+	}
+
+	public static Block createWallSign(String woodTypeId){
+		return new ModWallSignBlock(
+			WOODTYPE_MAP.get(woodTypeId),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)
+		);
+	}
+
+	public static Block createCeilingHangingSign(String woodType){
+		return new CeilingHangingSignBlock(
+			WOODTYPE_MAP.get(woodType),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)
+		);
+	}
+
+	public static Block createWallHangingSign(String woodType){
+		return new WallHangingSignBlock(
+			WOODTYPE_MAP.get(woodType),
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)
 		);
 	}
 
