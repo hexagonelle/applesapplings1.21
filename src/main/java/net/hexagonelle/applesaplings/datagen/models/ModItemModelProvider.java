@@ -152,6 +152,14 @@ public class ModItemModelProvider extends ItemModelProvider {
 		simpleItem(woodType + "_hanging_sign");
 	}
 
+	public void boatItem(String woodType){
+		simpleItem(woodType + "_boat");
+	}
+
+	public void chestBoatItem(String woodType){
+		simpleItem(woodType + "_chest_boat");
+	}
+
 	@Override
 	protected void registerModels() {
 		for (Map.Entry<String, ItemModelMethodArgPair> set :
@@ -188,11 +196,17 @@ public class ModItemModelProvider extends ItemModelProvider {
 				case WOOD_PRESSURE_PLATE:
 					woodPressurePlateItem(argsList.getFirst());
 					break;
-				case SIGN:
+				case SIGN_ITEM:
 					signItem(argsList.getFirst());
 					break;
-				case HANGING_SIGN:
+				case HANGING_SIGN_ITEM:
 					hangingSignItem(argsList.getFirst());
+					break;
+				case BOAT_ITEM:
+					boatItem(argsList.getFirst());
+					break;
+				case CHEST_BOAT_ITEM:
+					chestBoatItem(argsList.getFirst());
 					break;
 				default:
 					simpleItem(argsList.getFirst());

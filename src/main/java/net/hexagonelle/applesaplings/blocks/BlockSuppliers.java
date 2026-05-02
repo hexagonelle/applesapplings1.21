@@ -1,7 +1,7 @@
 package net.hexagonelle.applesaplings.blocks;
 
-import net.hexagonelle.applesaplings.blocks.custom.ModStandingSignBlock;
-import net.hexagonelle.applesaplings.blocks.custom.ModWallSignBlock;
+import net.hexagonelle.applesaplings.blocks.custom.signs.ModStandingSignBlock;
+import net.hexagonelle.applesaplings.blocks.custom.signs.ModWallSignBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

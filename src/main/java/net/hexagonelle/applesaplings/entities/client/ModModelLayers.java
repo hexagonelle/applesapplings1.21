@@ -11,6 +11,9 @@ public class ModModelLayers {
 	private static ResourceLocation modLoc(String path){
 		return fromNamespaceAndPath(AppleSaplings.MODID,path);
 	}
+	private static ResourceLocation mcLoc(String path){
+		return fromNamespaceAndPath("minecraft",path);
+	}
 
 	private static ModelLayerLocation boatModelLayer(String woodType){
 		return new ModelLayerLocation(modLoc("boat/" + woodType), "main");

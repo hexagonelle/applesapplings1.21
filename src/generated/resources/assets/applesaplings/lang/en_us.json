@@ -14,5 +14,7 @@
   "block.applesaplings.applewood_wood": "Applewood Wood",
   "block.applesaplings.stripped_applewood_log": "Stripped Applewood Log",
   "block.applesaplings.stripped_applewood_wood": "Stripped Applewood Wood",
-  "creativetab.applesaplings.applesaplings_tab": "Apple Saplings"
+  "creativetab.applesaplings.applesaplings_tab": "Apple Saplings",
+  "item.applesaplings.applewood_boat": "Applewood Boat",
+  "item.applesaplings.applewood_chest_boat": "Applewood Chest Boat"
 }

@@ -1,4 +1,4 @@
-package net.hexagonelle.applesaplings.blocks.custom;
+package net.hexagonelle.applesaplings.blocks.custom.signs;
 
 import net.hexagonelle.applesaplings.blocks.blockentities.custom.ModSignBlockEntity;
 import net.minecraft.core.BlockPos;

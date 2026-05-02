@@ -3,10 +3,10 @@ package net.hexagonelle.applesaplings;
 import net.hexagonelle.applesaplings.blocks.BlockRegistry;
 import net.hexagonelle.applesaplings.blocks.blockentities.BlockEntityTypeRegistry;
 import net.hexagonelle.applesaplings.creativetabs.CreativeTabRegistry;
+import net.hexagonelle.applesaplings.entities.EntityTypeRegistry;
+import net.hexagonelle.applesaplings.entities.client.ModBoatRenderer;
 import net.hexagonelle.applesaplings.items.ItemRegistry;
-import net.hexagonelle.applesaplings.util.woodtypes.ModWoodTypes;
 import net.hexagonelle.applesaplings.util.woodtypes.WoodTypeRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
@@ -49,6 +49,8 @@ public class AppleSaplings {
         CreativeTabRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so block entities get registered
         BlockEntityTypeRegistry.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so entities get registered
+        EntityTypeRegistry.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
@@ -86,12 +88,12 @@ public class AppleSaplings {
 
             Sheets.addWoodType(WoodTypeRegistry.WOODTYPE_MAP.get("applewood"));
 
-////        EntityRenderers.register(
-////          ModEntities.MOD_BOAT.get(),
-////          context -> new ModBoatRenderer(context, false));
-////        EntityRenderers.register(
-////          ModEntities.MOD_CHEST_BOAT.get(),
-////          context -> new ModBoatRenderer(context, true));
+        EntityRenderers.register(
+          EntityTypeRegistry.MOD_BOAT.get(),
+          context -> new ModBoatRenderer(context, false));
+        EntityRenderers.register(
+          EntityTypeRegistry.MOD_CHEST_BOAT.get(),
+          context -> new ModBoatRenderer(context, true));
 
         }
     }

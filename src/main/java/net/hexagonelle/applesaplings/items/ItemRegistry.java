@@ -86,4 +86,34 @@ public class ItemRegistry {
 			);
 	}
 
+	public static void registerBoatItem(
+		String woodType,
+		String woodTypeName,
+		String creativeTabId
+	){
+		String itemId = woodType + "_boat";
+		registerItem(
+			itemId,
+			() -> ItemSuppliers.createBoatItem(woodType)
+		);
+		assignItemNames(itemId,woodTypeName + " Boat");
+		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);
+		assignItemModel(itemId, ItemModelMethodArgPair.storeBoatItemArgs(woodType));
+	}
+
+	public static void registerChestBoatItem(
+		String woodType,
+		String woodTypeName,
+		String creativeTabId
+	){
+		String itemId = woodType + "_chest_boat";
+		registerItem(
+			itemId,
+			() -> ItemSuppliers.createChestBoatItem(woodType)
+		);
+		assignItemNames(itemId,woodTypeName + " Chest Boat");
+		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);
+		assignItemModel(itemId, ItemModelMethodArgPair.storeChestBoatItemArgs(woodType));
+	}
+
 }
