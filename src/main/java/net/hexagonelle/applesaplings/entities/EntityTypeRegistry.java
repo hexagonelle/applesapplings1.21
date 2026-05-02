@@ -25,12 +25,12 @@ public class EntityTypeRegistry {
 		ENTITY_TYPES.register(eventBus);
 	}
 
-	// For creating signs:
+	// For creating boats:
 	public static final Supplier<EntityType<ModBoat>> MOD_BOAT =
 		ENTITY_TYPES.register(
 			"mod_boat",
-			() -> EntityType.Builder.of(
-					(EntityType<ModBoat> entityType, Level level) -> new ModBoat(entityType, level),
+			() -> EntityType.Builder.<ModBoat>of(
+					ModBoat::new,
 					MobCategory.MISC
 				).sized(1.375f, 0.5625f)
 				.build("mod_boat")
@@ -40,8 +40,8 @@ public class EntityTypeRegistry {
 	public static final Supplier<EntityType<ModChestBoat>> MOD_CHEST_BOAT =
 		ENTITY_TYPES.register(
 			"mod_chest_boat",
-			() -> EntityType.Builder.of(
-					(EntityType<ModChestBoat> entityType, Level level) -> new ModChestBoat(entityType, level),
+			() -> EntityType.Builder.<ModChestBoat>of(
+					ModChestBoat::new,
 					MobCategory.MISC
 				).sized(1.375f, 0.5625f)
 				.build("mod_chest_boat")

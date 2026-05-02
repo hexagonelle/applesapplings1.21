@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.entities.custom.ModBoat;
+import net.hexagonelle.applesaplings.entities.custom.ModChestBoat;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.ListModel;
@@ -22,6 +23,8 @@ import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
 public class ModBoatRenderer extends BoatRenderer {
 
+	private final Map<ModBoat.Type, Pair<ResourceLocation,ListModel<Boat>>> boatResources;
+
 	public ModBoatRenderer(EntityRendererProvider.Context context, boolean isChestBoat) {
 		super(context, isChestBoat);
 
@@ -35,13 +38,11 @@ public class ModBoatRenderer extends BoatRenderer {
 							fromNamespaceAndPath(
 								AppleSaplings.MODID,
 								getTextureLocation(type, isChestBoat)
-							), this.createBoatModel(context, type, isChestBoat)
+							),this.createBoatModel(context, type, isChestBoat)
 						)
 					)
 				);
 	}
-
-	private final Map<ModBoat.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 
 
 	private static String getTextureLocation(ModBoat.Type boatType, boolean isChestBoat) {
@@ -76,8 +77,16 @@ public class ModBoatRenderer extends BoatRenderer {
 		return new ModelLayerLocation(fromNamespaceAndPath(AppleSaplings.MODID, path), model);
 	}
 
-	public @NotNull Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(@NotNull ModBoat boat) {
-			return this.boatResources.get(boat.getModVariant());
+	@Override
+	public @NotNull Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(@NotNull Boat boat) {
+		Pair<ResourceLocation,ListModel<Boat>> model = null;
+		if(boat instanceof ModBoat modBoat){
+			model = boatResources.get(modBoat.getModVariant());
+		}
+		if(boat instanceof ModChestBoat modChestBoat){
+			model = boatResources.get(modChestBoat.getModVariant());
+		}
+			return model == null ? boatResources.get(ModBoat.Type.byName("applewood")) : model;
 	}
 
 }
