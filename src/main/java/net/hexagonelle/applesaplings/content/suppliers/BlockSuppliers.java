@@ -2,25 +2,23 @@ package net.hexagonelle.applesaplings.content.suppliers;
 
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
 import net.hexagonelle.applesaplings.modclasses.ModWood;
-import net.hexagonelle.applesaplings.modclasses.blocks.ModCeilingHangingSignBlock;
-import net.hexagonelle.applesaplings.modclasses.blocks.ModStandingSignBlock;
-import net.hexagonelle.applesaplings.modclasses.blocks.ModWallHangingSignBlock;
-import net.hexagonelle.applesaplings.modclasses.blocks.ModWallSignBlock;
+import net.hexagonelle.applesaplings.modclasses.blocks.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import static net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry.WOODTYPE_MAP;
 
 public class BlockSuppliers {
-
-	// Create a planks block with the properties of the vanilla OAK_PLANKS
 
 	// Create a sapling with the given AbstractTreeGrower and the properties of the vanilla OAK_SAPLING
 //	public static SaplingBlock createSapling(AbstractTreeGrower treeGrower){
@@ -28,10 +26,12 @@ public class BlockSuppliers {
 //	}
 
 	// Create a Flowering leaves block with the properties of the vanilla OAK_LEAVES
-//	public static FloweringLeavesBlock createFloweringLeaves() {
-//		return new FloweringLeavesBlock(
-//			BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES));
-//	}
+	public static FloweringLeavesBlock createFloweringLeaves(Item fruit) {
+		return new FloweringLeavesBlock(
+			fruit,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+		);
+	}
 
 	// Create a log or wood block with the properties of the given block
 	public static Block createStrippedLogBlock() {

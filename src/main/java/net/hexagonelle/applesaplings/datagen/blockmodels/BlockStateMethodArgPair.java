@@ -26,6 +26,7 @@ public class BlockStateMethodArgPair {
 		BLOCK_WITH_ITEM,
 		SAPLING_BLOCK,
 		LEAVES,
+		FLOWERING_LEAVES,
 		STRIPPED_LOG,
 		STRIPPED_WOOD,
 		LOG,
@@ -57,6 +58,9 @@ public class BlockStateMethodArgPair {
 	}
 	public static BlockStateMethodArgPair storeLeavesBlockArgs(String leavesIdPrefix){
 		return new BlockStateMethodArgPair(blockStateMethods.LEAVES,List.of(leavesIdPrefix));
+	}
+	public static BlockStateMethodArgPair storeFloweringLeavesBlockArgs(String leavesIdPrefix){
+		return new BlockStateMethodArgPair(blockStateMethods.FLOWERING_LEAVES,List.of(leavesIdPrefix));
 	}
 	public static BlockStateMethodArgPair storeStrippedLogBlockArgs(String woodType){
 		return new BlockStateMethodArgPair(blockStateMethods.STRIPPED_LOG,List.of(woodType));

@@ -5,11 +5,11 @@ import net.hexagonelle.applesaplings.content.ModBlocks;
 import net.hexagonelle.applesaplings.datagen.blockmodels.BlockStateMethodArgPair;
 import net.hexagonelle.applesaplings.datagen.itemmodels.ItemModelMethodArgPair;
 import net.hexagonelle.applesaplings.content.suppliers.BlockSuppliers;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.datamaps.builtin.Strippable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -231,6 +231,22 @@ public class BlockRegistry {
 		);
 	}
 
+	public static void registerFloweringLeavesBlock(
+		String woodTypeId,
+		String woodTypeName,
+		Item fruit,
+		String creativeTabId
+	){
+
+		registerBlockWithItem(
+			"flowering_" + woodTypeId + "_leaves",
+			"Flowering " + woodTypeName + " Leaves",
+			() -> createFloweringLeaves(fruit),
+			BlockStateMethodArgPair.storeFloweringLeavesBlockArgs(woodTypeId),
+			creativeTabId
+		);
+	}
+
 	public static void registerWoodStairsBlock(
 		String woodTypeId,
 		String woodTypeName,
@@ -417,6 +433,7 @@ public class BlockRegistry {
 	public static void registerWoodSet(
 		String woodTypeId,
 		String woodTypeName,
+		Item fruit,
 		String creativeTabId
 	){
 
@@ -426,6 +443,7 @@ public class BlockRegistry {
 		registerWoodBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerPlanksBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerLeavesBlock(woodTypeId,woodTypeName,creativeTabId);
+		registerFloweringLeavesBlock(woodTypeId,woodTypeName,fruit,creativeTabId);
 		registerWoodStairsBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodSlabBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodFenceBlock(woodTypeId,woodTypeName,creativeTabId);

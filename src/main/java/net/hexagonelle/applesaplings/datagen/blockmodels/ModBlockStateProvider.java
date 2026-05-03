@@ -2,16 +2,22 @@ package net.hexagonelle.applesaplings.datagen.blockmodels;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
+import net.hexagonelle.applesaplings.modclasses.blocks.FloweringLeavesBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
 import static net.minecraft.resources.ResourceLocation.*;
@@ -56,14 +62,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 	private ModelFile singleTextureModel(
 		String blockId,
-		String parent,
-		ResourceLocation texture,
-		String renderAs
+//		String parent,
+		ResourceLocation texture
+//		, String renderAs
 	){
-		return models().singleTexture(
-			blockId, mcLoc(parent),
-			"all", texture
-		).renderType(renderAs);
+//		return models().singleTexture(
+//			blockId, mcLoc(parent),
+//			"all", texture
+//		);
+		return models().cubeAll(blockId,texture);
 	}
 
 	public void blockItem(String blockId){
@@ -71,6 +78,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		simpleBlockItem(
 			block,
 			new ModelFile.UncheckedModelFile(blockResource(blockId)));
+	}
+
+	// generates data for the item version of a block based on a specific blockstate
+	private void blockItem(String blockId, String blockState){
+
+		simpleBlockItem(
+			BLOCK_MAP.get(blockId).get(),
+			new ModelFile.UncheckedModelFile(blockResourceWithState(
+				blockId,
+				blockState
+			))
+		);
+	}
+
+	public void cubeBlock(String blockId){
+		Block block = blockFromId(blockId);
+		simpleBlock(block);
 	}
 
 	public void cubeBlockWithItem(String blockId){
@@ -83,8 +107,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		simpleBlockWithItem(
 			block,
 			singleTextureModel(
-				blockId, parent,
-				blockTexture(block), renderAs
+				blockId,
+//				parent,
+				blockTexture(block)
+//				, renderAs
 			)
 		);
 	}
@@ -108,8 +134,48 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	}
 
 	// creates a model json and texture json for the given LeavesBlock
-	private void customLeaves(String leavesIdPrefix){
-		blockWithItem(leavesIdPrefix + "_leaves","block/leaves","cutout");
+	private void customLeaves(String woodTypeId){
+//		blockWithItem(woodTypeId + "_leaves","block/leaves","cutout");
+		cubeBlockWithItem(woodTypeId + "_leaves");
+	}
+
+
+	// creates a model json and texture json for the given blockstate of a FruitLeavesBlock
+	private ConfiguredModel[] floweringLeavesStates(
+		BlockState blockState,
+		String woodTypeId
+	){
+
+		String blockId = "flowering_" + woodTypeId + "_leaves";
+		DeferredBlock<Block> floweringLeavesDeferred = BLOCK_MAP.get(blockId);
+		FloweringLeavesBlock floweringLeavesBlock = (FloweringLeavesBlock) floweringLeavesDeferred.get();
+		String blockstateValue = String.valueOf(floweringLeavesBlock.getAge(blockState));
+
+		ConfiguredModel[] models = new ConfiguredModel[1];
+
+		models[0] = new ConfiguredModel(
+			singleTextureModel(
+//			blockPathNameWithState(blockId,blockstateValue), "block/leaves",
+//			blockResourceWithState(blockId,blockstateValue),"cutout_mipped"
+				blockPathNameWithState(blockId,blockstateValue),blockResourceWithState(blockId,blockstateValue)
+
+			)
+		);
+
+		return models;
+	}
+
+	private void customFloweringLeaves(String woodTypeId){
+
+		String blockId = "flowering_" + woodTypeId + "_leaves";
+		FloweringLeavesBlock floweringLeavesBlock = (FloweringLeavesBlock) BLOCK_MAP.get(blockId).get();
+
+		Function<BlockState,ConfiguredModel[]> function =
+			state -> floweringLeavesStates(state,woodTypeId);
+
+		getVariantBuilder(floweringLeavesBlock).forAllStates(function);
+		blockItem(blockId,"0");
+
 	}
 
 	// generates model (and texture?) json for a stripped log block and its item
@@ -248,6 +314,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 					break;
 				case LEAVES:
 					customLeaves(argsList.getFirst());
+					break;
+				case FLOWERING_LEAVES:
+					customFloweringLeaves(argsList.getFirst());
 					break;
 				case STRIPPED_LOG:
 					customStrippedLog(argsList.getFirst());
