@@ -1,0 +1,10 @@
+{
+  "values": {
+    "applesaplings:applewood_wood": {
+      "stripped_block": "applesaplings:stripped_applewood_wood"
+    },
+    "applesaplings:applewood_log": {
+      "stripped_block": "applesaplings:stripped_applewood_log"
+    }
+  }
+}

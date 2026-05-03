@@ -9,8 +9,8 @@ import net.neoforged.neoforge.common.data.LanguageProvider;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.hexagonelle.applesaplings.datagen.models.ModBlockStateProvider.blockFromId;
-import static net.hexagonelle.applesaplings.datagen.models.ModItemModelProvider.itemFromId;
+import static net.hexagonelle.applesaplings.datagen.blockmodels.ModBlockStateProvider.blockFromId;
+import static net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider.itemFromId;
 
 public class ModLanguageProvider extends LanguageProvider {
 	public ModLanguageProvider(PackOutput output, String modid, String locale) {

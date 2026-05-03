@@ -1,12 +1,12 @@
 package net.hexagonelle.applesaplings;
 
-import net.hexagonelle.applesaplings.blocks.BlockRegistry;
-import net.hexagonelle.applesaplings.blocks.blockentities.BlockEntityTypeRegistry;
-import net.hexagonelle.applesaplings.creativetabs.CreativeTabRegistry;
-import net.hexagonelle.applesaplings.entities.EntityTypeRegistry;
-import net.hexagonelle.applesaplings.entities.client.ModBoatRenderer;
-import net.hexagonelle.applesaplings.items.ItemRegistry;
-import net.hexagonelle.applesaplings.util.woodtypes.WoodTypeRegistry;
+import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
+//import net.hexagonelle.applesaplings.blocks.blockentities.BlockEntityTypeRegistry;
+import net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry;
+import net.hexagonelle.applesaplings.content.registers.EntityTypeRegistry;
+import net.hexagonelle.applesaplings.render.ModBoatRenderer;
+import net.hexagonelle.applesaplings.content.registers.ItemRegistry;
+import net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
@@ -37,7 +37,7 @@ public class AppleSaplings {
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public AppleSaplings(IEventBus modEventBus, ModContainer modContainer) {
+    public AppleSaplings(IEventBus modEventBus, ModContainer modContainer){
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -47,11 +47,13 @@ public class AppleSaplings {
         ItemRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CreativeTabRegistry.register(modEventBus);
+
+//        ModBlockEntities.modifyBlockEntities(BEevent);
+
         // Register the Deferred Register to the mod event bus so block entities get registered
-        BlockEntityTypeRegistry.register(modEventBus);
+//        BlockEntityTypeRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so entities get registered
         EntityTypeRegistry.register(modEventBus);
-
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.

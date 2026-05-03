@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-import static net.hexagonelle.applesaplings.blocks.BlockRegistry.BLOCK_MAP;
+import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
 	public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
@@ -21,7 +21,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
 		tag(BlockTags.FENCES).add(BLOCK_MAP.get("applewood_fence").get());
 		tag(BlockTags.FENCE_GATES).add(BLOCK_MAP.get("applewood_fence_gate").get());
+
 		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_sign").get());
+		tag(BlockTags.STANDING_SIGNS).add(BLOCK_MAP.get("applewood_sign").get());
 		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_wall_sign").get());
+		tag(BlockTags.WALL_SIGNS).add(BLOCK_MAP.get("applewood_wall_sign").get());
+
+		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_hanging_sign").get());
+		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_wall_hanging_sign").get());
+		tag(BlockTags.CEILING_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_hanging_sign").get());
+		tag(BlockTags.WALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_wall_hanging_sign").get());
 	}
 }
