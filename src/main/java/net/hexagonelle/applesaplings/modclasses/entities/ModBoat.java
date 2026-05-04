@@ -53,7 +53,7 @@ public class ModBoat extends Boat {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLEWOOD.ordinal());
+		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
 	};
 
 	public void setVariant(Type variant) {
@@ -67,18 +67,18 @@ public class ModBoat extends Boat {
 	public @NotNull Item getDropItem() {
 		Item item;
 		switch (getModVariant()) {
-			case APPLEWOOD:
-				item = ITEM_MAP.get("applewood_boat").get();
+			case APPLE:
+				item = ITEM_MAP.get("apple_boat").get();
 				break;
 			default:
-				item = ITEM_MAP.get("applewood_boat").get();
+				item = ITEM_MAP.get("apple_boat").get();
 		}
 
 		return item;
 	}
 
 	public enum Type implements StringRepresentable, IExtensibleEnum {
-		APPLEWOOD(BLOCK_MAP.get("applewood_planks").get(), "applewood");
+		APPLE(BLOCK_MAP.get("apple_planks").get(), "apple");
 
 		private final String name;
 		private final Supplier<Block> planksSupplier;
@@ -141,7 +141,7 @@ public class ModBoat extends Boat {
 		}
 
 		public static ModBoat.Type byName(String name) {
-			return CODEC.byName(name, APPLEWOOD);
+			return CODEC.byName(name, APPLE);
 		}
 	}
 

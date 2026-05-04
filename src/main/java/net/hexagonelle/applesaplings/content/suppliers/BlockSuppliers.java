@@ -1,72 +1,54 @@
 package net.hexagonelle.applesaplings.content.suppliers;
 
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
-import net.hexagonelle.applesaplings.modclasses.ModWood;
 import net.hexagonelle.applesaplings.modclasses.blocks.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import static net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry.WOODTYPE_MAP;
 
 public class BlockSuppliers {
 
-	// Create a sapling with the given AbstractTreeGrower and the properties of the vanilla OAK_SAPLING
-//	public static SaplingBlock createSapling(AbstractTreeGrower treeGrower){
-//		return new SaplingBlock(treeGrower, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
-//	}
-
-	// Create a Flowering leaves block with the properties of the vanilla OAK_LEAVES
-	public static FloweringLeavesBlock createFloweringLeaves(Item fruit) {
-		return new FloweringLeavesBlock(
-			fruit,
-			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
-		);
+	// Create a sapling with the given TreeGrower and the properties of the vanilla OAK_SAPLING
+	public static SaplingBlock createSapling(TreeGrower treeGrower){
+		return new SaplingBlock(treeGrower, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
 	}
 
 	// Create a log or wood block with the properties of the given block
 	public static Block createStrippedLogBlock() {
-		return new ModWood(BlockBehaviour.Properties
-			.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
-			.strength(2.0F)
-//					.mapColor(CustomWood.woodMapColor(topMapColor,sideMapColor))
-		).setIsStripped(true);
+		return new RotatedPillarBlock(
+			BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
+		);
 	}
 
 	// Create a log or wood block with the properties of the given block
 	public static Block createStrippedWoodBlock() {
-		return new ModWood(BlockBehaviour.Properties
-			.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
-			.strength(2.0F)
-//					.mapColor(CustomWood.woodMapColor(topMapColor,sideMapColor))
-		).setIsStripped(true);
+		return new RotatedPillarBlock(
+			BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
+		);
 	}
 
 	// Create a stripped log or wood block with the properties of the given block
-	public static Block createLogBlock(String strippedBlockKey) {
-		return new ModWood(BlockBehaviour.Properties
-			.ofFullCopy(Blocks.OAK_LOG)
-			.strength(2.0F)
-//					.mapColor(CustomWood.woodMapColor(topMapColor,sideMapColor))
-		).setStrippedVersion(BlockRegistry.BLOCK_MAP.get(strippedBlockKey).get());
+	public static Block createLogBlock() {
+		return new RotatedPillarBlock(
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
+		);
 	}
 
 	// Create a stripped log or wood block with the properties of the given block
-	public static Block createWoodBlock(String strippedBlockKey) {
-		return new ModWood(BlockBehaviour.Properties
-			.ofFullCopy(Blocks.OAK_WOOD)
-			.strength(2.0F)
-//					.mapColor(CustomWood.woodMapColor(topMapColor,sideMapColor))
-		).setStrippedVersion(BlockRegistry.BLOCK_MAP.get(strippedBlockKey).get());
+	public static Block createWoodBlock() {
+		return new RotatedPillarBlock(
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
+		);
 	}
 
 	// Create a planks block with the properties of the vanilla OAK_PLANKS
@@ -102,7 +84,17 @@ public class BlockSuppliers {
 				return 30;
 			}
 		};
-	}public static Block createWoodStairBlock(String baseBlockString){
+	}
+
+	// Create a Flowering leaves block with the properties of the vanilla OAK_LEAVES
+	public static FloweringLeavesBlock createFloweringLeaves(Item fruit) {
+		return new FloweringLeavesBlock(
+			fruit,
+			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+		);
+	}
+
+	public static Block createWoodStairBlock(String baseBlockString){
 		return new StairBlock(BlockRegistry.BLOCK_MAP.get(baseBlockString).get().defaultBlockState(),
 			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS));
 	}

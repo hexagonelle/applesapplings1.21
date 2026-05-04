@@ -1,10 +1,9 @@
 package net.hexagonelle.applesaplings;
 
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
-//import net.hexagonelle.applesaplings.blocks.blockentities.BlockEntityTypeRegistry;
 import net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry;
 import net.hexagonelle.applesaplings.content.registers.EntityTypeRegistry;
-import net.hexagonelle.applesaplings.render.ModBoatRenderer;
+import net.hexagonelle.applesaplings.modclasses.render.ModBoatRenderer;
 import net.hexagonelle.applesaplings.content.registers.ItemRegistry;
 import net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry;
 import net.minecraft.client.renderer.Sheets;
@@ -47,11 +46,6 @@ public class AppleSaplings {
         ItemRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CreativeTabRegistry.register(modEventBus);
-
-//        ModBlockEntities.modifyBlockEntities(BEevent);
-
-        // Register the Deferred Register to the mod event bus so block entities get registered
-//        BlockEntityTypeRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so entities get registered
         EntityTypeRegistry.register(modEventBus);
         // Register ourselves for server and other game events we are interested in.
@@ -88,7 +82,7 @@ public class AppleSaplings {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
-            Sheets.addWoodType(WoodTypeRegistry.WOODTYPE_MAP.get("applewood"));
+            Sheets.addWoodType(WoodTypeRegistry.WOODTYPE_MAP.get("apple"));
 
         EntityRenderers.register(
           EntityTypeRegistry.MOD_BOAT.get(),

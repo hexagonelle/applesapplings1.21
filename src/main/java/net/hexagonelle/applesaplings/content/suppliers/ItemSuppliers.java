@@ -34,11 +34,11 @@ public class ItemSuppliers {
 	}
 
 	public static Item createBoatItem(String woodType){
-		return new ModBoatItem(false, ModBoat.Type.APPLEWOOD, new Item.Properties());
+		return new ModBoatItem(false, ModBoat.Type.APPLE, new Item.Properties());
 	}
 
 	public static Item createChestBoatItem(String woodType){
-		return new ModBoatItem(true, ModBoat.Type.APPLEWOOD, new Item.Properties());
+		return new ModBoatItem(true, ModBoat.Type.APPLE, new Item.Properties());
 	}
 
 }

@@ -53,8 +53,8 @@ public class BlockStateMethodArgPair {
 	public static BlockStateMethodArgPair storeBlockWithItemArgs(String blockId){
 		return new BlockStateMethodArgPair(blockStateMethods.BLOCK_WITH_ITEM,List.of(blockId));
 	}
-	public static BlockStateMethodArgPair storeSaplingBlockArgs(String blockId){
-		return new BlockStateMethodArgPair(blockStateMethods.SAPLING_BLOCK,List.of(blockId));
+	public static BlockStateMethodArgPair storeSaplingBlockArgs(String woodType){
+		return new BlockStateMethodArgPair(blockStateMethods.SAPLING_BLOCK,List.of(woodType));
 	}
 	public static BlockStateMethodArgPair storeLeavesBlockArgs(String leavesIdPrefix){
 		return new BlockStateMethodArgPair(blockStateMethods.LEAVES,List.of(leavesIdPrefix));

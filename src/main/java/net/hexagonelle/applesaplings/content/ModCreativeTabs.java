@@ -12,7 +12,7 @@ public class ModCreativeTabs {
 			"Apple Saplings",
 			() -> CreativeTabSuppliers.createCreativeTab(
 				"applesaplings_tab",
-				"stripped_applewood_log"
+				"stripped_apple_log"
 			)
 		);
 

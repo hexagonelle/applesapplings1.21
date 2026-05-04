@@ -11,8 +11,9 @@ public class ModBlocks {
 	public static void init() {
 
 		registerWoodSet(
-			"applewood",
-			"Applewood",
+			"apple",
+			"Apple",
+			ModTreeGrower.APPLE,
 			Items.APPLE,
 			"applesaplings_tab"
 		);

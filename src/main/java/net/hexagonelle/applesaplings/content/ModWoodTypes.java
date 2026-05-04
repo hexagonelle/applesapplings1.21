@@ -5,7 +5,7 @@ import net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry;
 public class ModWoodTypes {
 
 	public static void init(){
-		WoodTypeRegistry.registerWooodType("applewood");
+		WoodTypeRegistry.registerWooodType("apple");
 	}
 
 }

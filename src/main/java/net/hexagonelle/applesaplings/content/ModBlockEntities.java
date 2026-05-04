@@ -14,14 +14,14 @@ public class ModBlockEntities {
 	public static void modifyBlockEntities(BlockEntityTypeAddBlocksEvent event) {
 		event.modify(
 			BlockEntityType.SIGN,
-			BLOCK_MAP.get("applewood_sign").get(),
-			BLOCK_MAP.get("applewood_wall_sign").get()
+			BLOCK_MAP.get("apple_sign").get(),
+			BLOCK_MAP.get("apple_wall_sign").get()
 		);
 
 		event.modify(
 			BlockEntityType.HANGING_SIGN,
-			BLOCK_MAP.get("applewood_hanging_sign").get(),
-			BLOCK_MAP.get("applewood_wall_hanging_sign").get()
+			BLOCK_MAP.get("apple_hanging_sign").get(),
+			BLOCK_MAP.get("apple_wall_hanging_sign").get()
 		);
 
 	}

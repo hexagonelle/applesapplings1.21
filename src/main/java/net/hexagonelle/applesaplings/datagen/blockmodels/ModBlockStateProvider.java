@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -29,7 +30,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		super(output, modid, exFileHelper);
 	}
 
-	public static final Map<String, BlockStateMethodArgPair> blockBlockstateMap = new HashMap<>();
+	public static final Map<String, BlockStateMethodArgPair> blockBlockstateMap = new LinkedHashMap<>();
 
 	// registers a block and places the corresponding DeferredBlock in the HashMap by blockId
 	public static void assignBlockstate(
@@ -123,7 +124,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 		);
 	}
 
-	public void saplingBlock(String blockId){
+	public void saplingBlock(String woodTypeId){
+		String blockId = woodTypeId + "_sapling";
 		Block block = blockFromId(blockId);
 		simpleBlock(
 			block,
@@ -219,7 +221,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	}
 
 	private void customPlanks(String woodType){
-		blockWithItem(woodType + "_planks","block/oak_planks","solid");
+		cubeBlockWithItem(woodType + "_planks");
 	}
 
 	public void customWoodStairs(String woodType){
@@ -230,10 +232,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	}
 
 	public void customWoodSlab(String woodType){
-		Block baseBlock = BlockRegistry.BLOCK_MAP.get(woodType + "_planks").get();
+		String baseBlockId = woodType + "_planks";
 		slabBlock(
 			(SlabBlock) BlockRegistry.BLOCK_MAP.get(woodType + "_slab").get(),
-			blockTexture(baseBlock), blockTexture(baseBlock)
+			blockResource(baseBlockId), blockResource(baseBlockId)
 		);
 	}
 

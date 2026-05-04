@@ -2,11 +2,13 @@ package net.hexagonelle.applesaplings.content.registers;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.content.ModBlocks;
+import net.hexagonelle.applesaplings.content.ModTreeGrower;
 import net.hexagonelle.applesaplings.datagen.blockmodels.BlockStateMethodArgPair;
 import net.hexagonelle.applesaplings.datagen.itemmodels.ItemModelMethodArgPair;
 import net.hexagonelle.applesaplings.content.suppliers.BlockSuppliers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -141,6 +143,23 @@ public class BlockRegistry {
 
 	// SPECIFIC BLOCK METHODS
 
+	public static void registerSaplingBlock(
+		String woodTypeId,
+		String woodTypeName,
+		TreeGrower treeGrower,
+		String creativeTabId
+	){
+		registerBlockWithItem(
+			woodTypeId + "_sapling",
+			woodTypeName + " Sapling",
+			() -> createSapling(treeGrower),
+			BlockStateMethodArgPair.storeSaplingBlockArgs(woodTypeId),
+			ItemModelMethodArgPair.storeSaplingItemArgs(woodTypeId),
+			creativeTabId
+
+		);
+	}
+
 	public static void registerStrippedLogBlock(
 		String woodTypeId,
 		String woodTypeName,
@@ -180,7 +199,7 @@ public class BlockRegistry {
 		registerBlockWithItem(
 			woodTypeId + "_log",
 			woodTypeName + " Log",
-			() -> BlockSuppliers.createLogBlock("stripped_" + woodTypeId + "_log"),
+			BlockSuppliers::createLogBlock,
 			BlockStateMethodArgPair.storeLogBlockArgs(woodTypeId),
 			creativeTabId
 		);
@@ -195,7 +214,7 @@ public class BlockRegistry {
 		registerBlockWithItem(
 			woodTypeId + "_wood",
 			woodTypeName + " Wood",
-			() -> BlockSuppliers.createWoodBlock("stripped_" + woodTypeId + "_wood"),
+			BlockSuppliers::createWoodBlock,
 			BlockStateMethodArgPair.storeWoodBlockArgs(woodTypeId),
 			creativeTabId
 		);
@@ -433,10 +452,12 @@ public class BlockRegistry {
 	public static void registerWoodSet(
 		String woodTypeId,
 		String woodTypeName,
+		TreeGrower treeGrower,
 		Item fruit,
 		String creativeTabId
 	){
 
+		registerSaplingBlock(woodTypeId,woodTypeName,treeGrower,creativeTabId);
 		registerStrippedLogBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerStrippedWoodBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerLogBlock(woodTypeId,woodTypeName,creativeTabId);
@@ -445,7 +466,6 @@ public class BlockRegistry {
 		registerLeavesBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerFloweringLeavesBlock(woodTypeId,woodTypeName,fruit,creativeTabId);
 		registerWoodStairsBlock(woodTypeId,woodTypeName,creativeTabId);
-		registerWoodSlabBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodFenceBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodFenceGateBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodDoorBlock(woodTypeId,woodTypeName,creativeTabId);
@@ -454,5 +474,6 @@ public class BlockRegistry {
 		registerWoodPressurePlateBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerSignBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerHangingSignBlock(woodTypeId,woodTypeName,creativeTabId);
+		registerWoodSlabBlock(woodTypeId,woodTypeName,creativeTabId);
 	}
 }

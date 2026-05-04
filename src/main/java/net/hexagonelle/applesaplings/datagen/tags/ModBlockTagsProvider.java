@@ -19,17 +19,17 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
-		tag(BlockTags.FENCES).add(BLOCK_MAP.get("applewood_fence").get());
-		tag(BlockTags.FENCE_GATES).add(BLOCK_MAP.get("applewood_fence_gate").get());
+		tag(BlockTags.FENCES).add(BLOCK_MAP.get("apple_fence").get());
+		tag(BlockTags.FENCE_GATES).add(BLOCK_MAP.get("apple_fence_gate").get());
 
-		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_sign").get());
-		tag(BlockTags.STANDING_SIGNS).add(BLOCK_MAP.get("applewood_sign").get());
-		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("applewood_wall_sign").get());
-		tag(BlockTags.WALL_SIGNS).add(BLOCK_MAP.get("applewood_wall_sign").get());
+		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("apple_sign").get());
+		tag(BlockTags.STANDING_SIGNS).add(BLOCK_MAP.get("apple_sign").get());
+		tag(BlockTags.SIGNS).add(BLOCK_MAP.get("apple_wall_sign").get());
+		tag(BlockTags.WALL_SIGNS).add(BLOCK_MAP.get("apple_wall_sign").get());
 
-		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_hanging_sign").get());
-		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_wall_hanging_sign").get());
-		tag(BlockTags.CEILING_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_hanging_sign").get());
-		tag(BlockTags.WALL_HANGING_SIGNS).add(BLOCK_MAP.get("applewood_wall_hanging_sign").get());
+		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("apple_hanging_sign").get());
+		tag(BlockTags.ALL_HANGING_SIGNS).add(BLOCK_MAP.get("apple_wall_hanging_sign").get());
+		tag(BlockTags.CEILING_HANGING_SIGNS).add(BLOCK_MAP.get("apple_hanging_sign").get());
+		tag(BlockTags.WALL_HANGING_SIGNS).add(BLOCK_MAP.get("apple_wall_hanging_sign").get());
 	}
 }

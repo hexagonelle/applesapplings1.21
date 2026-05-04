@@ -34,11 +34,11 @@ public class ModChestBoat extends ChestBoat {
 	public @NotNull Item getDropItem() {
 		Item item;
 		switch (getModVariant()) {
-			case APPLEWOOD:
-				item = ITEM_MAP.get("applewood_chest_boat").get();
+			case APPLE:
+				item = ITEM_MAP.get("apple_chest_boat").get();
 				break;
 			default:
-				item = ITEM_MAP.get("applewood_chest_boat").get();
+				item = ITEM_MAP.get("apple_chest_boat").get();
 		}
 		return item;
 	}
@@ -51,7 +51,7 @@ public class ModChestBoat extends ChestBoat {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLEWOOD.ordinal());
+		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
 	};
 
 	@Override
@@ -71,7 +71,7 @@ public class ModChestBoat extends ChestBoat {
 	}
 
 //	public enum Type implements StringRepresentable, IExtensibleEnum {
-//		APPLEWOOD(BLOCK_MAP.get("applewood_planks").get(), "applewood");
+//		APPLEWOOD(BLOCK_MAP.get("apple_planks").get(), "apple");
 //
 //		private final String name;
 //		/** @deprecated */
