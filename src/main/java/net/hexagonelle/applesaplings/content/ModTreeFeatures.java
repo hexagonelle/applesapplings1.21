@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -19,13 +20,15 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
 import static net.minecraft.data.worldgen.features.FeatureUtils.createKey;
 
 public class ModTreeFeatures {
-	public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE = createKey("apple");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE = createModKey("apple");
 
 	public static ResourceKey<ConfiguredFeature<?, ?>> createModKey(String name) {
 		return ResourceKey.create(
@@ -33,6 +36,10 @@ public class ModTreeFeatures {
 			ResourceLocation.fromNamespaceAndPath(AppleSaplings.MODID, name)
 		);
 	}
+
+	public static final HashMap<String, ResourceKey<ConfiguredFeature<?, ?>>> TREE_FEATURES_MAP =
+		new LinkedHashMap<>();
+
 
 	private static TreeConfiguration.TreeConfigurationBuilder createFloweringBlobTree(String woodTypeId){
 
@@ -69,12 +76,15 @@ public class ModTreeFeatures {
 	public static void bootstrap(BootstrapContext<ConfiguredFeature<?,?>> context) {
 		List<TreeDecorator> floweringAppleDecoratorList =
 			createFloweringDecorator(0.1F, 3,"apple");
+
 		FeatureUtils.register(
 			context, APPLE, Feature.TREE,
 			createFloweringBlobTree("apple")
 				.decorators(floweringAppleDecoratorList)
 				.build()
 		);
+
+		TREE_FEATURES_MAP.put("apple", APPLE);
 
 	}
 
