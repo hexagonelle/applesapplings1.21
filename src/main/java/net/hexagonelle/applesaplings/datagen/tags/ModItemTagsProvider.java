@@ -31,8 +31,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.SAPLINGS,ItemTags.SAPLINGS);
 		this.copy(BlockTags.LEAVES,ItemTags.LEAVES);
 		this.copy(BlockTags.LOGS,ItemTags.LOGS);
-	this.copy(BlockTags.LOGS_THAT_BURN,ItemTags.LOGS_THAT_BURN);
-	this.copy(ModBlockTags.STRIPPED_LOGS,ModItemTags.STRIPPED_LOGS);
+		this.copy(BlockTags.LOGS_THAT_BURN,ItemTags.LOGS_THAT_BURN);
+		this.copy(ModBlockTags.STRIPPED_LOGS,ModItemTags.STRIPPED_LOGS);
+		this.copy(ModBlockTags.APPLE_LOGS,ModItemTags.APPLE_LOGS);
 		this.copy(BlockTags.PLANKS,ItemTags.PLANKS);
 		this.tag(ItemTags.SIGNS).add(ITEM_MAP.get("apple_sign").get());
 		this.tag(ItemTags.HANGING_SIGNS).add(ITEM_MAP.get("apple_hanging_sign").get());

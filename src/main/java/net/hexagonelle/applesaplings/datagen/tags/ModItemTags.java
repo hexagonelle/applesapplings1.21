@@ -7,10 +7,11 @@ import net.minecraft.world.item.Item;
 
 public class ModItemTags {
 
-	public static final TagKey<Item> STRIPPED_LOGS = createForgeItemTag("stripped_logs");
-
-	private static TagKey<Item> createForgeItemTag(String name) {
-		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", name));
+	private static TagKey<Item> createCommonItemTag(String name) {
+		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("common", name));
 	}
+
+	public static final TagKey<Item> STRIPPED_LOGS = createCommonItemTag("stripped_logs");
+	public static final TagKey<Item> APPLE_LOGS = createCommonItemTag("apple_logs");
 
 }

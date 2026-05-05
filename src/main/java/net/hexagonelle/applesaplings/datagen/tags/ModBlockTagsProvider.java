@@ -15,6 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
+import static net.hexagonelle.applesaplings.datagen.tags.ModBlockTags.APPLE_LOGS;
 import static net.minecraft.tags.BlockTags.*;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
@@ -46,17 +47,23 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 			blockFromId("flowering_apple_leaves"),
 			blockFromId("apple_leaves")
 		);
-//		assignTags(LOGS,
-//			blockFromId("apple_log"),
-//			blockFromId("apple_wood"),
-//			blockFromId("stripped_apple_log"),
-//			blockFromId("stripped_apple_wood")
-//		);
+		assignTags(LOGS,
+			blockFromId("apple_log"),
+			blockFromId("apple_wood"),
+			blockFromId("stripped_apple_log"),
+			blockFromId("stripped_apple_wood")
+		);
 		assignTags(ModBlockTags.STRIPPED_LOGS,
 			blockFromId("stripped_apple_log"),
 			blockFromId("stripped_apple_wood")
 		);
 		assignTags(LOGS_THAT_BURN,
+			blockFromId("apple_log"),
+			blockFromId("apple_wood"),
+			blockFromId("stripped_apple_log"),
+			blockFromId("stripped_apple_wood")
+		);
+		assignTags(APPLE_LOGS,
 			blockFromId("apple_log"),
 			blockFromId("apple_wood"),
 			blockFromId("stripped_apple_log"),

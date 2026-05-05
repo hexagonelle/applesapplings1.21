@@ -1,248 +1,234 @@
 package net.hexagonelle.applesaplings.datagen.recipes;
 
+import net.hexagonelle.applesaplings.datagen.tags.ModItemTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CompletableFuture;
+
+import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
+import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.ITEM_MAP;
+
 public class ModRecipeProvider extends RecipeProvider {
-	public ModRecipeProvider(PackOutput output) {
-		super(output);
+	public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries){
+		super(output,registries);
 	}
 
-	protected static void planksFromLog(
-		@NotNull Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> logOrWood,
-		DeferredBlock<Block> planks
-	){
 
-		String recipeID = planks.getId().getPath() + "_from_" + logOrWood.getId().getPath();
-		RecipeProvider.planksFromLog();
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks.get(), 4)
-			.unlockedBy(getHasName(logOrWood.get()), has(logOrWood.get()))
-			.requires(logOrWood.get())
-			.save(writer,recipeID);
+	private static Block getModBlock(String blockId){
+		return BLOCK_MAP.get(blockId).get();
+	}
+
+	protected static void saplingFromFruit(
+		RecipeOutput recipeOutput,
+		String woodTypeId,
+		Item fruit,
+		ItemLike baseSapling
+	){
+		ShapelessRecipeBuilder.shapeless(
+				RecipeCategory.MISC,
+				getModBlock(woodTypeId + "_sapling"),
+				1
+			).unlockedBy(getHasName(baseSapling),has(fruit))
+			.requires(baseSapling).requires(fruit)
+			.save(recipeOutput);
 	}
 
 	protected static void woodFromLogs(
-		@NotNull Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> logBlock,
-		DeferredBlock<Block> woodBlock
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-
-		String recipeID = woodBlock.getId().getPath() + "_from_" + logBlock.getId().getPath();
-
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, woodBlock.get(),3)
-			.pattern("AA")
-			.pattern("AA")
-			.define('A', logBlock.get())
-			.unlockedBy(getHasName(logBlock.get()), has(logBlock.get()))
-			.save(writer, recipeID);
+		Block wood = getModBlock(woodTypeId + "_wood");
+		Block log = getModBlock(woodTypeId + "_log");
+		woodFromLogs(recipeOutput, wood, log);
 	}
 
-	protected static void sign(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Item> sign,
-		DeferredBlock<Block> planks
+	protected static void planksFromLog(
+		RecipeOutput recipeOutput,
+		String woodTypeId,
+		TagKey<Item> log
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, sign.get(), 3)
-			.pattern("AAA")
-			.pattern("AAA")
-			.pattern(" B ")
-			.define('A', planks.get())
-			.define('B', Items.STICK)
-			.unlockedBy(getHasName(planks.get()),has(planks.get()))
-			.group("sign")
-			.save(writer);
+		Block planks = getModBlock(woodTypeId + "_planks");
+		planksFromLog(recipeOutput, planks, log,4);
 	}
 
-	protected static void hangingSign(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Item> sign,
-		DeferredBlock<Block> material
+	protected static void stairsFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(
-				RecipeCategory.DECORATIONS, sign.get(), 6)
-			.pattern("B B")
-			.pattern("AAA")
-			.pattern("AAA")
-			.define('A', material.get())
-			.define('B', Items.CHAIN)
-			.group("hanging_sign")
-			.unlockedBy("has_stripped_logs", has(material.get()))
-			.save(writer);
+		Block stairs = getModBlock(woodTypeId + "_stairs");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.stairBuilder(stairs, material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void slab(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> slab,
-		DeferredBlock<Block> material
+	protected static void slabFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, slab.get(), 6)
-			.pattern("AAA")
-			.define('A', material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Block slab = getModBlock(woodTypeId + "_slab");
+		Block material = getModBlock(woodTypeId + "_planks");
+		RecipeProvider.slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, slab, material);
 	}
 
-	protected static void stairs(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> stairs,
-		DeferredBlock<Block> material
+	protected static void fenceFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stairs.get(), 4)
-			.pattern("A  ")
-			.pattern("AA ")
-			.pattern("AAA")
-			.define('A', material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Block fence = getModBlock(woodTypeId + "_fence");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.fenceBuilder(fence,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void button(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> button,
-		DeferredBlock<Block> material
+	protected static void fenceGateFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button.get())
-			.requires(material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Block fenceGate = getModBlock(woodTypeId + "_fence_gate");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.fenceGateBuilder(fenceGate,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void pressurePlate(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> pressurePlate,
-		DeferredBlock<Block> material
+	protected static void doorFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, pressurePlate.get())
-			.pattern("AA")
-			.define('A', material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Block door = getModBlock(woodTypeId + "_door");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.doorBuilder(door,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void woodenFence(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> fence,
-		DeferredBlock<Block> planks
+	protected static void trapdoorfromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(
-				RecipeCategory.DECORATIONS, fence.get(), 3)
-			.pattern("ABA")
-			.pattern("ABA")
-			.define('A', planks.get())
-			.define('B', Items.STICK)
-			.unlockedBy(getHasName(planks.get()), has(planks.get()))
-			.save(writer);
+		Block trapdoor = getModBlock(woodTypeId + "_trapdoor");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.trapdoorBuilder(trapdoor,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void woodenFenceGate(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> fenceGate,
-		DeferredBlock<Block> planks
+	protected static void buttonFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, fenceGate.get())
-			.pattern("BAB")
-			.pattern("BAB")
-			.define('A', planks.get())
-			.define('B', Items.STICK)
-			.unlockedBy(getHasName(planks.get()), has(planks.get()))
-			.save(writer);
+		Block button = getModBlock(woodTypeId + "_button");
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.buttonBuilder(button,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void door(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> door,
-		DeferredBlock<Block> material
+	protected static void pressurePlateFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, door.get(), 3)
-			.pattern("AA")
-			.pattern("AA")
-			.pattern("AA")
-			.define('A', material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Block pressurePlate = getModBlock(woodTypeId + "_pressure_plate");
+		Block material = getModBlock(woodTypeId + "_planks");
+		RecipeProvider.pressurePlate(recipeOutput,pressurePlate,material);
 	}
 
-	protected static void trapdoor(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Block> trapdoor,
-		DeferredBlock<Block> material
+	protected static void signFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, trapdoor.get(), 2)
-			.pattern("AAA")
-			.pattern("AAA")
-			.define('A', material.get())
-			.unlockedBy(getHasName(material.get()), has(material.get()))
-			.save(writer);
+		Item sign = ITEM_MAP.get(woodTypeId + "_sign").get();
+		Block planks = getModBlock(woodTypeId + "_planks");
+		Block log = getModBlock(woodTypeId + "_log");
+		Ingredient material = Ingredient.of(planks);
+		RecipeProvider.signBuilder(sign,material)
+			.unlockedBy("has_log", has(log))
+			.save(recipeOutput);
 	}
 
-	protected static void woodenBoat(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Item> boat,
-		DeferredBlock<Block> planks
+	protected static void hangingSignFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-
-		String recipeID = boat.getId().getPath() + "_from_" + planks.getId().getPath();
-
-		ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, boat.get())
-			.pattern("A A")
-			.pattern("AAA")
-			.define('A', planks.get())
-			.group("boat")
-			.unlockedBy("in_water", insideOf(Blocks.WATER))
-			.save(writer, recipeID);
+		Item hangingSign = ITEM_MAP.get(woodTypeId + "_hanging_sign").get();
+		Block material = getModBlock(woodTypeId + "_planks");
+		RecipeProvider.hangingSign(recipeOutput,hangingSign,material);
 	}
 
-	protected static void chestBoat(
-		Consumer<FinishedRecipe> writer,
-		DeferredBlock<Item> chestBoat,
-		DeferredBlock<Item> boat
+	protected static void boatFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
 	){
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, chestBoat.get())
-			.requires(Blocks.CHEST)
-			.requires(boat.get())
-			.group("chest_boat")
-			.unlockedBy("has_boat", has(ItemTags.BOATS)).save(writer);
+		Item boat = ITEM_MAP.get(woodTypeId + "_boat").get();
+		Block material = getModBlock(woodTypeId + "_planks");
+		RecipeProvider.woodenBoat(recipeOutput,boat,material);
+	}
+
+	protected static void chestBoatFromPlanks(
+		RecipeOutput recipeOutput,
+		String woodTypeId
+	){
+		Item chestBoat = ITEM_MAP.get(woodTypeId + "_chest_boat").get();
+		Item material = ITEM_MAP.get(woodTypeId + "_boat").get();
+		RecipeProvider.chestBoat(recipeOutput,chestBoat,material);
+	}
+
+	protected static void woodSet(
+		RecipeOutput recipeOutput,
+		String woodTypeId,
+		Item fruit,
+		Item baseSapling,
+		TagKey<Item> logsTag
+	) {
+		saplingFromFruit(recipeOutput, woodTypeId, fruit, baseSapling);
+		woodFromLogs(recipeOutput, woodTypeId);
+		woodFromLogs(recipeOutput, "stripped_" + woodTypeId);
+		planksFromLog(recipeOutput, woodTypeId, logsTag);
+		stairsFromPlanks(recipeOutput, woodTypeId);
+		slabFromPlanks(recipeOutput, woodTypeId);
+		fenceFromPlanks(recipeOutput, woodTypeId);
+		fenceGateFromPlanks(recipeOutput, woodTypeId);
+		doorFromPlanks(recipeOutput, woodTypeId);
+		trapdoorfromPlanks(recipeOutput, woodTypeId);
+		buttonFromPlanks(recipeOutput, woodTypeId);
+		pressurePlateFromPlanks(recipeOutput, woodTypeId);
+		signFromPlanks(recipeOutput, woodTypeId);
+		hangingSignFromPlanks(recipeOutput, woodTypeId);
+		boatFromPlanks(recipeOutput, woodTypeId);
+		chestBoatFromPlanks(recipeOutput, woodTypeId);
 	}
 
 	@Override
-	protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
-		ShapelessRecipeBuilder
-			.shapeless(RecipeCategory.MISC, APPLE_SAPLING.get(), 1)
-			.unlockedBy(getHasName(APPLE_SAPLING.get()), has(APPLE_SAPLING.get()))
-			.requires(Items.OAK_SAPLING)
-			.requires(Items.APPLE)
-			.save(writer);
-
-		woodFromLogs(writer, APPLEWOOD_LOG, APPLEWOOD_WOOD);
-		woodFromLogs(writer, STRIPPED_APPLEWOOD_LOG, STRIPPED_APPLEWOOD_WOOD);
-		planksFromLog(writer, APPLEWOOD_LOG, APPLEWOOD_PLANKS);
-		planksFromLog(writer, APPLEWOOD_WOOD, APPLEWOOD_PLANKS);
-		planksFromLog(writer, STRIPPED_APPLEWOOD_LOG, APPLEWOOD_PLANKS);
-		planksFromLog(writer, STRIPPED_APPLEWOOD_WOOD, APPLEWOOD_PLANKS);
-		sign(writer,ModItems.APPLEWOOD_SIGN, APPLEWOOD_PLANKS);
-		hangingSign(writer, ModItems.APPLEWOOD_HANGING_SIGN,STRIPPED_APPLEWOOD_LOG);
-		slab(writer, APPLEWOOD_SLAB, APPLEWOOD_PLANKS);
-		stairs(writer, APPLEWOOD_STAIRS, APPLEWOOD_PLANKS);
-		button(writer, APPLEWOOD_BUTTON, APPLEWOOD_PLANKS);
-		pressurePlate(writer, APPLEWOOD_PRESSURE_PLATE, APPLEWOOD_PLANKS);
-		woodenFence(writer, APPLEWOOD_FENCE, APPLEWOOD_PLANKS);
-		woodenFenceGate(writer, APPLEWOOD_FENCE_GATE, APPLEWOOD_PLANKS);
-		door(writer, APPLEWOOD_DOOR, APPLEWOOD_PLANKS);
-		trapdoor(writer, APPLEWOOD_TRAPDOOR, APPLEWOOD_PLANKS);
-		woodenBoat(writer, ModItems.APPLEWOOD_BOAT, APPLEWOOD_PLANKS);
-		chestBoat(writer, ModItems.APPLEWOOD_CHEST_BOAT, ModItems.APPLEWOOD_BOAT);
-
+	protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
+		woodSet(
+			recipeOutput,
+			"apple",
+			Items.APPLE,
+			Items.OAK_SAPLING,
+			ModItemTags.APPLE_LOGS
+		);
 	}
-
 }

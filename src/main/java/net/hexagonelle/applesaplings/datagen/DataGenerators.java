@@ -4,6 +4,7 @@ import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider;
 import net.hexagonelle.applesaplings.datagen.blockmodels.ModBlockStateProvider;
 import net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider;
+import net.hexagonelle.applesaplings.datagen.recipes.ModRecipeProvider;
 import net.hexagonelle.applesaplings.datagen.tags.ModBlockTagsProvider;
 import net.hexagonelle.applesaplings.datagen.tags.ModItemTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -51,6 +52,10 @@ public class DataGenerators {
 		generator.addProvider(
 			event.includeServer(),
 			new ModDatapackProvider(packOutput,lookupProvider)
+		);
+		generator.addProvider(
+			event.includeServer(),
+			new ModRecipeProvider(packOutput,lookupProvider)
 		);
 
 //		generator.addProvider(
