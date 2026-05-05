@@ -1,5 +1,6 @@
 package net.hexagonelle.applesaplings.datagen.itemmodels;
 
+import net.hexagonelle.applesaplings.AppleSaplings;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -16,8 +17,8 @@ import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.ITEM_
 import static net.minecraft.resources.ResourceLocation.withDefaultNamespace;
 
 public class ModItemModelProvider extends ItemModelProvider {
-	public ModItemModelProvider(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
-		super(output, modid, existingFileHelper);
+	public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, AppleSaplings.MODID, existingFileHelper);
 	}
 
 	public static final Map<String, ItemModelMethodArgPair> itemItemModelMap = new HashMap<>();

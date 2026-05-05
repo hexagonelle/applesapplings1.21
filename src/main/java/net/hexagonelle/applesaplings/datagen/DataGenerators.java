@@ -5,9 +5,12 @@ import net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider;
 import net.hexagonelle.applesaplings.datagen.blockmodels.ModBlockStateProvider;
 import net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider;
 import net.hexagonelle.applesaplings.datagen.tags.ModBlockTagsProvider;
+import net.hexagonelle.applesaplings.datagen.tags.ModItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -27,19 +30,27 @@ public class DataGenerators {
 
 		generator.addProvider(
 			event.includeClient(),
-			new ModBlockStateProvider(packOutput, AppleSaplings.MODID, existingFileHelper)
+			new ModBlockStateProvider(packOutput, existingFileHelper)
 		);
 		generator.addProvider(
 			event.includeClient(),
-			new ModItemModelProvider(packOutput, AppleSaplings.MODID, existingFileHelper)
+			new ModItemModelProvider(packOutput, existingFileHelper)
 		);
 		generator.addProvider(
 			event.includeClient(),
-			new ModLanguageProvider(packOutput, AppleSaplings.MODID, "en_us")
+			new ModLanguageProvider(packOutput, "en_us")
+		);
+		TagsProvider<Block> blockTags = generator.addProvider(
+			event.includeClient(),
+			new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper)
 		);
 		generator.addProvider(
 			event.includeClient(),
-			new ModBlockTagsProvider(packOutput, lookupProvider, AppleSaplings.MODID, existingFileHelper)
+			new ModItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper)
+		);
+		generator.addProvider(
+			event.includeServer(),
+			new ModDatapackProvider(packOutput,lookupProvider)
 		);
 
 //		generator.addProvider(

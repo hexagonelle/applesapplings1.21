@@ -13,8 +13,8 @@ import static net.hexagonelle.applesaplings.datagen.blockmodels.ModBlockStatePro
 import static net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider.itemFromId;
 
 public class ModLanguageProvider extends LanguageProvider {
-	public ModLanguageProvider(PackOutput output, String modid, String locale) {
-		super(output, modid, locale);
+	public ModLanguageProvider(PackOutput output, String locale) {
+		super(output, AppleSaplings.MODID, locale);
 	}
 
 	public static final Map<String, String> blockLangMap = new HashMap<>();

@@ -6,6 +6,7 @@ import net.hexagonelle.applesaplings.content.registers.EntityTypeRegistry;
 import net.hexagonelle.applesaplings.modclasses.render.ModBoatRenderer;
 import net.hexagonelle.applesaplings.content.registers.ItemRegistry;
 import net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry;
+import net.hexagonelle.applesaplings.modclasses.worldgen.ModTreeDecoratorType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
@@ -48,6 +49,8 @@ public class AppleSaplings {
         CreativeTabRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so entities get registered
         EntityTypeRegistry.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so tree decorator types get registered
+        ModTreeDecoratorType.register(modEventBus);
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.

@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
 import static net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider.assignCreativeTabNames;
@@ -24,7 +25,7 @@ public class CreativeTabRegistry {
 	public static void register(IEventBus eventBus){CREATIVETABS.register(eventBus);}
 
 	// Creates a hashmap so that we can refer to a RegistryObject by a string
-	public static final HashMap<String, Supplier<CreativeModeTab>> CREATIVETAB_MAP = new HashMap<>();
+	public static final HashMap<String, Supplier<CreativeModeTab>> CREATIVETAB_MAP = new LinkedHashMap<>();
 
 	// This method will register all the blocks listed in ModBlocks
 	static {

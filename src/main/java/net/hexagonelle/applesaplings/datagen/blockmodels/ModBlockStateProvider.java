@@ -26,8 +26,8 @@ import static net.minecraft.resources.ResourceLocation.*;
 public class ModBlockStateProvider extends BlockStateProvider {
 
 
-	public ModBlockStateProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
-		super(output, modid, exFileHelper);
+	public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+		super(output, AppleSaplings.MODID, exFileHelper);
 	}
 
 	public static final Map<String, BlockStateMethodArgPair> blockBlockstateMap = new LinkedHashMap<>();

@@ -1,16 +1,10 @@
 package net.hexagonelle.applesaplings.content;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.grower.TreeGrower;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import org.antlr.v4.runtime.tree.Tree;
 
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import static net.hexagonelle.applesaplings.content.ModTreeFeatures.TREE_FEATURES_MAP;
 

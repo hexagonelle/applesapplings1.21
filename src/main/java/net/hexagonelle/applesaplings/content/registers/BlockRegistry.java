@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -39,7 +40,7 @@ public class BlockRegistry {
 	}
 
 	// Creates a hashmap so that we can refer to a RegistryObject by a string
-	public static final HashMap<String, DeferredBlock<Block>> BLOCK_MAP = new HashMap<>();
+	public static final HashMap<String, DeferredBlock<Block>> BLOCK_MAP = new LinkedHashMap<>();
 
 	// Create a list of blocks that are valid as a mod sign block entity:
 	public static final List<String> MOD_SIGN_BLOCKS = new ArrayList<>();
