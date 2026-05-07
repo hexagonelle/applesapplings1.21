@@ -1,7 +1,7 @@
 package net.hexagonelle.applesaplings.content.suppliers;
 
-import net.hexagonelle.applesaplings.modclasses.entities.ModBoat;
-import net.hexagonelle.applesaplings.modclasses.items.ModBoatItem;
+import net.hexagonelle.applesaplings.content.ModBoat;
+import net.hexagonelle.applesaplings.modclasses.entities.ModBoatItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;

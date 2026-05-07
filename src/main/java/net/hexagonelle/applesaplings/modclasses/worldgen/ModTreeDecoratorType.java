@@ -2,7 +2,6 @@ package net.hexagonelle.applesaplings.modclasses.worldgen;
 
 import com.mojang.serialization.MapCodec;
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.content.worldgen.tree.FloweringLeavesDecorator;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;

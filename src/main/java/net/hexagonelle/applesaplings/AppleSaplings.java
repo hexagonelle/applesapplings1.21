@@ -3,12 +3,12 @@ package net.hexagonelle.applesaplings;
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
 import net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry;
 import net.hexagonelle.applesaplings.content.registers.EntityTypeRegistry;
-import net.hexagonelle.applesaplings.modclasses.render.ModBoatRenderer;
+import net.hexagonelle.applesaplings.modclasses.entities.ModBoatRenderer;
 import net.hexagonelle.applesaplings.content.registers.ItemRegistry;
-import net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry;
 import net.hexagonelle.applesaplings.modclasses.worldgen.ModTreeDecoratorType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -26,6 +26,10 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import java.util.Map;
+
+import static net.hexagonelle.applesaplings.content.registers.WoodTypeRegistry.WOODTYPE_MAP;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(AppleSaplings.MODID)
@@ -51,6 +55,7 @@ public class AppleSaplings {
         EntityTypeRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tree decorator types get registered
         ModTreeDecoratorType.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -85,14 +90,19 @@ public class AppleSaplings {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
-            Sheets.addWoodType(WoodTypeRegistry.WOODTYPE_MAP.get("apple"));
+            for (Map.Entry<String, WoodType> set : WOODTYPE_MAP.entrySet()){
+                WoodType woodType = set.getValue();
+                Sheets.addWoodType(woodType);
+            }
 
-        EntityRenderers.register(
-          EntityTypeRegistry.MOD_BOAT.get(),
-          context -> new ModBoatRenderer(context, false));
-        EntityRenderers.register(
-          EntityTypeRegistry.MOD_CHEST_BOAT.get(),
-          context -> new ModBoatRenderer(context, true));
+            EntityRenderers.register(
+              EntityTypeRegistry.MOD_BOAT.get(),
+              context -> new ModBoatRenderer(context, false)
+            );
+            EntityRenderers.register(
+              EntityTypeRegistry.MOD_CHEST_BOAT.get(),
+              context -> new ModBoatRenderer(context, true)
+            );
 
         }
     }

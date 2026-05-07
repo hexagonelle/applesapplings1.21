@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
-import static net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider.assignCreativeTabNames;
+import static net.hexagonelle.applesaplings.datagen.providers.ModLanguageProvider.assignCreativeTabNames;
 
 public class CreativeTabRegistry {
 

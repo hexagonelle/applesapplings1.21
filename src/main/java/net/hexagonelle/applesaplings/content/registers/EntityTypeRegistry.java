@@ -1,7 +1,7 @@
 package net.hexagonelle.applesaplings.content.registers;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.modclasses.entities.ModBoat;
+import net.hexagonelle.applesaplings.content.ModBoat;
 import net.hexagonelle.applesaplings.modclasses.entities.ModChestBoat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;

@@ -2,9 +2,8 @@ package net.hexagonelle.applesaplings.content.registers;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
 import net.hexagonelle.applesaplings.content.ModBlocks;
-import net.hexagonelle.applesaplings.content.ModTreeGrower;
-import net.hexagonelle.applesaplings.datagen.blockmodels.BlockStateMethodArgPair;
-import net.hexagonelle.applesaplings.datagen.itemmodels.ItemModelMethodArgPair;
+import net.hexagonelle.applesaplings.datagen.util.BlockStateMethodArgPair;
+import net.hexagonelle.applesaplings.datagen.util.ItemModelMethodArgPair;
 import net.hexagonelle.applesaplings.content.suppliers.BlockSuppliers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -21,9 +20,9 @@ import java.util.function.Supplier;
 
 import static net.hexagonelle.applesaplings.content.suppliers.BlockSuppliers.*;
 import static net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry.*;
-import static net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider.assignBlockNames;
-import static net.hexagonelle.applesaplings.datagen.blockmodels.ModBlockStateProvider.*;
-import static net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider.assignItemModel;
+import static net.hexagonelle.applesaplings.datagen.providers.ModLanguageProvider.assignBlockNames;
+import static net.hexagonelle.applesaplings.datagen.providers.ModBlockStateProvider.*;
+import static net.hexagonelle.applesaplings.datagen.providers.ModItemModelProvider.assignItemModel;
 import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.*;
 
 public class BlockRegistry {

@@ -1,7 +1,7 @@
 package net.hexagonelle.applesaplings.content.registers;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.datagen.itemmodels.ItemModelMethodArgPair;
+import net.hexagonelle.applesaplings.datagen.util.ItemModelMethodArgPair;
 import net.hexagonelle.applesaplings.content.ModItems;
 import net.hexagonelle.applesaplings.content.suppliers.ItemSuppliers;
 import net.minecraft.world.item.Item;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 import static net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry.ITEM_MODTAB_MAP;
-import static net.hexagonelle.applesaplings.datagen.lang.ModLanguageProvider.assignItemNames;
-import static net.hexagonelle.applesaplings.datagen.itemmodels.ModItemModelProvider.assignItemModel;
+import static net.hexagonelle.applesaplings.datagen.providers.ModLanguageProvider.assignItemNames;
+import static net.hexagonelle.applesaplings.datagen.providers.ModItemModelProvider.assignItemModel;
 
 public class ItemRegistry {
 
