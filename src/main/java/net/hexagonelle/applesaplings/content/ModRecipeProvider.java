@@ -1,6 +1,5 @@
-package net.hexagonelle.applesaplings.datagen.providers;
+package net.hexagonelle.applesaplings.content;
 
-import net.hexagonelle.applesaplings.content.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -30,6 +29,13 @@ public class ModRecipeProvider extends RecipeProvider {
 			Items.APPLE,
 			Items.OAK_SAPLING,
 			ModItemTags.APPLE_LOGS
+		);
+		woodSetRecipes(
+			recipeOutput,
+			"orange",
+			Items.AXOLOTL_SPAWN_EGG,
+			Items.ACACIA_SAPLING,
+			ModItemTags.ORANGE_LOGS
 		);
 	}
 

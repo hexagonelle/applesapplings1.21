@@ -1,7 +1,6 @@
-package net.hexagonelle.applesaplings.datagen.providers;
+package net.hexagonelle.applesaplings.content;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.content.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
@@ -15,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
+import static net.hexagonelle.applesaplings.content.ModBlockTags.ORANGE_LOGS;
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
 import static net.hexagonelle.applesaplings.content.ModBlockTags.APPLE_LOGS;
 import static net.minecraft.tags.BlockTags.*;
@@ -23,7 +23,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
+
 		assignWoodSetTags("apple",APPLE_LOGS);
+		assignWoodSetTags("orange",ORANGE_LOGS);
 	}
 
 	public ModBlockTagsProvider(

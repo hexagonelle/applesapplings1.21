@@ -2,10 +2,9 @@ package net.hexagonelle.applesaplings.content.suppliers;
 
 import net.hexagonelle.applesaplings.content.ModBoat;
 import net.hexagonelle.applesaplings.modclasses.entities.ModBoatItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
@@ -15,6 +14,10 @@ public class ItemSuppliers {
 	// A method that creates a new BlockItem, given some DeferredBlock<Block>
 	public static Item createBlockItem(String blockId){
 		return new BlockItem(BLOCK_MAP.get(blockId).get(), new Item.Properties());
+	}
+
+	public static Item createFruitItem(){
+		return new Item(new Item.Properties().food(Foods.APPLE));
 	}
 
 	public static Item createSignItem(String woodType){

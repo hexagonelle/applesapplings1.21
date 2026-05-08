@@ -45,10 +45,10 @@ public class AppleSaplings {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
-        BlockRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ItemRegistry.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so blocks get registered
+        BlockRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CreativeTabRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so entities get registered

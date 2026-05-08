@@ -37,7 +37,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
 	@Override
 	protected void generate() {
+
 		generateWoodSetLoot("apple",Items.APPLE);
+		generateWoodSetLoot("orange",ITEM_MAP.get("orange").get());
 	}
 
 

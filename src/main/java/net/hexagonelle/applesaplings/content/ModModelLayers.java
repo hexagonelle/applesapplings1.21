@@ -17,6 +17,9 @@ public class ModModelLayers {
 	static{
 		boatModelLayer("apple");
 		chestBoatModelLayer("apple");
+
+		boatModelLayer("orange");
+		chestBoatModelLayer("orange");
 	}
 
 	private static ResourceLocation modLoc(String path){

@@ -23,7 +23,8 @@ import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.ITEM_
 public class ModBoat extends Boat {
 
 	public enum Type implements StringRepresentable {
-		APPLE("apple");
+		APPLE("apple"),
+		ORANGE("orange");
 
 
 

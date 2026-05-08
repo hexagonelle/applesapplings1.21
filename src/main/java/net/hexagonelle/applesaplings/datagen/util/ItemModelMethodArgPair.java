@@ -37,6 +37,12 @@ public class ItemModelMethodArgPair {
 		CHEST_BOAT_ITEM
 	}
 
+	public static ItemModelMethodArgPair storeSimpleItemArgs(
+		String itemId
+	){
+		return new ItemModelMethodArgPair(itemModelMethods.SIMPLE_ITEM,List.of(itemId));
+	}
+
 	public static ItemModelMethodArgPair storeSaplingItemArgs(String saplingPrefixId){
 		return new ItemModelMethodArgPair(itemModelMethods.SAPLING_ITEM,List.of(saplingPrefixId));
 	}

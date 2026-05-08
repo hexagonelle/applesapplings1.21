@@ -27,6 +27,9 @@ public class ItemRegistry {
 	// A method that will register the DeferredRegister.Item to the mod event bus
 	public static void register(IEventBus eventBus){ITEMS.register(eventBus);}
 
+
+//	public static DeferredItem<Item> ORANGE = ITEMS.register("orange", ItemSuppliers::createFruitItem);
+
 	// Creates a hashmap so that we can refer to a RegistryObject by a string
 	public static final HashMap<String, DeferredItem<Item>> ITEM_MAP = new HashMap<>();
 
@@ -74,6 +77,20 @@ public class ItemRegistry {
 
 	public static void registerBlockItem(String blockId){
 		registerItem(blockId,()-> ItemSuppliers.createBlockItem(blockId));
+	}
+
+	public static void registerFruitItem(
+		String fruitId,
+		String fruitName,
+		String creativeTabId
+	){
+		registerItem(
+			fruitId,
+			fruitName,
+			ItemSuppliers::createFruitItem,
+			ItemModelMethodArgPair.storeSimpleItemArgs(fruitId),
+			creativeTabId
+		);
 	}
 
 	public static void registerSignItem(

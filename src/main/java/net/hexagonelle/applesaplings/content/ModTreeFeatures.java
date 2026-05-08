@@ -8,10 +8,12 @@ import static net.hexagonelle.applesaplings.content.registers.tree.TreeFeatureRe
 
 public class ModTreeFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE = createModKey("apple");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE = createModKey("orange");
 
 
 	public static void bootstrap(BootstrapContext<ConfiguredFeature<?,?>> context) {
 		createFloweringTree(context,"apple", APPLE);
+		createFloweringTree(context,"orange", ORANGE);
 	}
 
 }

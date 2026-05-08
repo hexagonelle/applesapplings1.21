@@ -1,8 +1,6 @@
-package net.hexagonelle.applesaplings.datagen.providers;
+package net.hexagonelle.applesaplings.content;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
-import net.hexagonelle.applesaplings.content.ModBlockTags;
-import net.hexagonelle.applesaplings.content.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -25,6 +23,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider){
 		signTags("apple");
+		signTags("orange");
 
 		this.copy(BlockTags.SAPLINGS,ItemTags.SAPLINGS);
 		this.copy(BlockTags.LEAVES,ItemTags.LEAVES);

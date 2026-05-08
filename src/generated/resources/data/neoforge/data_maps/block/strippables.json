@@ -2,6 +2,9 @@
   "values": {
     "applesaplings:apple_wood": {
       "stripped_block": "stripped_apple_wood"
+    },
+    "applesaplings:orange_wood": {
+      "stripped_block": "stripped_orange_wood"
     }
   }
 }
