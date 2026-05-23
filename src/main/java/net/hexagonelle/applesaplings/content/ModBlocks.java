@@ -16,7 +16,7 @@ public class ModBlocks {
 			"apple",
 			"Apple",
 			ModTreeGrower.APPLE,
-			Items.APPLE,
+			true,
 			"applesaplings_tab"
 		);
 //		System.out.println(ITEM_MAP.get("orange").get());
@@ -24,7 +24,7 @@ public class ModBlocks {
 			"orange",
 			"Orange",
 			ModTreeGrower.ORANGE,
-			Items.AXOLOTL_SPAWN_EGG,
+			false,
 			"applesaplings_tab"
 		);
 	}

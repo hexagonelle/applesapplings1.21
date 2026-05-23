@@ -1,6 +1,8 @@
 {
   "values": [
     "applesaplings:flowering_apple_leaves",
-    "applesaplings:apple_leaves"
+    "applesaplings:apple_leaves",
+    "applesaplings:flowering_orange_leaves",
+    "applesaplings:orange_leaves"
   ]
 }

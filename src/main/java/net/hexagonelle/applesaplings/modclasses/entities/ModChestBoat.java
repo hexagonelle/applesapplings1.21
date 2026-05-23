@@ -45,8 +45,12 @@ public class ModChestBoat extends ChestBoat {
 			builder.define(DATA_ID_TYPE,type.ordinal());
 		}
 
-//		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
+		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
+
+		builder.define(DATA_ID_TYPE,getModVariant().ordinal());
+
 	};
+
 
 	@Override
 	protected void addAdditionalSaveData(CompoundTag compound) {

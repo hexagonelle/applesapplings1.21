@@ -1,6 +1,8 @@
 {
   "values": [
     "applesaplings:stripped_apple_log",
-    "applesaplings:stripped_apple_wood"
+    "applesaplings:stripped_apple_wood",
+    "applesaplings:stripped_orange_log",
+    "applesaplings:stripped_orange_wood"
   ]
 }

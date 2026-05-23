@@ -65,15 +65,15 @@ public class ModBoatRenderer extends BoatRenderer {
 	}
 
 	public static ModelLayerLocation createBoatModelName(ModBoat.Type boatType) {
-		return createLocation("boat/" + boatType.getName(), "main");
+		return createLocation("boat/" + boatType.getName());
 	}
 
 	public static ModelLayerLocation createChestBoatModelName(ModBoat.Type boatType) {
-		return createLocation("chest_boat/" + boatType.getName(), "main");
+		return createLocation("chest_boat/" + boatType.getName());
 	}
 
-	private static ModelLayerLocation createLocation(String path, String model) {
-		return new ModelLayerLocation(fromNamespaceAndPath(AppleSaplings.MODID, path), model);
+	private static ModelLayerLocation createLocation(String path) {
+		return new ModelLayerLocation(fromNamespaceAndPath(AppleSaplings.MODID, path), "main");
 	}
 
 	@Override
@@ -85,7 +85,12 @@ public class ModBoatRenderer extends BoatRenderer {
 		if(boat instanceof ModChestBoat modChestBoat){
 			model = boatResources.get(modChestBoat.getModVariant());
 		}
-			return model == null ? boatResources.get(ModBoat.Type.byName("apple")) : model;
+
+		if(model == null){
+			return boatResources.get(ModBoat.Type.byName("apple"));
+		} else {
+			return model;
+		}
 	}
 
 }

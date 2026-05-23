@@ -253,14 +253,14 @@ public class BlockRegistry {
 	public static void registerFloweringLeavesBlock(
 		String woodTypeId,
 		String woodTypeName,
-		Item fruit,
+		boolean fruitIsVanilla,
 		String creativeTabId
 	){
 
 		registerBlockWithItem(
 			"flowering_" + woodTypeId + "_leaves",
 			"Flowering " + woodTypeName + " Leaves",
-			() -> createFloweringLeaves(fruit),
+			() -> createFloweringLeaves(woodTypeId,fruitIsVanilla),
 			BlockStateMethodArgPair.storeFloweringLeavesBlockArgs(woodTypeId),
 			creativeTabId
 		);
@@ -453,7 +453,7 @@ public class BlockRegistry {
 		String woodTypeId,
 		String woodTypeName,
 		TreeGrower treeGrower,
-		Item fruit,
+		boolean fruitIsVanilla,
 		String creativeTabId
 	){
 
@@ -464,7 +464,7 @@ public class BlockRegistry {
 		registerWoodBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerPlanksBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerLeavesBlock(woodTypeId,woodTypeName,creativeTabId);
-		registerFloweringLeavesBlock(woodTypeId,woodTypeName,fruit,creativeTabId);
+		registerFloweringLeavesBlock(woodTypeId,woodTypeName,fruitIsVanilla,creativeTabId);
 		registerWoodStairsBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodFenceBlock(woodTypeId,woodTypeName,creativeTabId);
 		registerWoodFenceGateBlock(woodTypeId,woodTypeName,creativeTabId);

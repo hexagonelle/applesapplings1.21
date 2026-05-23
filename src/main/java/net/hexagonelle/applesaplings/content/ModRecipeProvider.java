@@ -33,7 +33,7 @@ public class ModRecipeProvider extends RecipeProvider {
 		woodSetRecipes(
 			recipeOutput,
 			"orange",
-			Items.AXOLOTL_SPAWN_EGG,
+			ITEM_MAP.get("orange").get(),
 			Items.ACACIA_SAPLING,
 			ModItemTags.ORANGE_LOGS
 		);

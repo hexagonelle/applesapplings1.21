@@ -1,6 +1,7 @@
 package net.hexagonelle.applesaplings.content.registers;
 
 import net.hexagonelle.applesaplings.AppleSaplings;
+import net.hexagonelle.applesaplings.content.ModBoat;
 import net.hexagonelle.applesaplings.datagen.util.ItemModelMethodArgPair;
 import net.hexagonelle.applesaplings.content.ModItems;
 import net.hexagonelle.applesaplings.content.suppliers.ItemSuppliers;
@@ -120,12 +121,13 @@ public class ItemRegistry {
 	public static void registerBoatItem(
 		String woodType,
 		String woodTypeName,
+		ModBoat.Type boatType,
 		String creativeTabId
 	){
 		String itemId = woodType + "_boat";
 		registerItem(
 			itemId,
-			() -> ItemSuppliers.createBoatItem(woodType)
+			() -> ItemSuppliers.createBoatItem(boatType)
 		);
 		assignItemNames(itemId,woodTypeName + " Boat");
 		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);
@@ -135,12 +137,13 @@ public class ItemRegistry {
 	public static void registerChestBoatItem(
 		String woodType,
 		String woodTypeName,
+		ModBoat.Type boatType,
 		String creativeTabId
 	){
 		String itemId = woodType + "_chest_boat";
 		registerItem(
 			itemId,
-			() -> ItemSuppliers.createChestBoatItem(woodType)
+			() -> ItemSuppliers.createChestBoatItem(boatType)
 		);
 		assignItemNames(itemId,woodTypeName + " Chest Boat");
 		ITEM_MODTAB_MAP.put(ITEM_MAP.get(itemId),creativeTabId);

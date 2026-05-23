@@ -87,9 +87,10 @@ public class BlockSuppliers {
 	}
 
 	// Create a Flowering leaves block with the properties of the vanilla OAK_LEAVES
-	public static FloweringLeavesBlock createFloweringLeaves(Item fruit) {
+	public static FloweringLeavesBlock createFloweringLeaves(String fruitId, boolean fruitIsVanilla){
 		return new FloweringLeavesBlock(
-			fruit,
+			fruitId,
+			fruitIsVanilla,
 			BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
 		);
 	}

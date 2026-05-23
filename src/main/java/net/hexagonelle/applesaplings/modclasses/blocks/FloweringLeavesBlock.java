@@ -2,6 +2,8 @@ package net.hexagonelle.applesaplings.modclasses.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
@@ -9,6 +11,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,19 +25,23 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 
+import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
+import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.ITEM_MAP;
 import static net.neoforged.neoforge.common.CommonHooks.onRightClickBlock;
 
 
 public class FloweringLeavesBlock extends LeavesBlock {
 	public static final int MAX_AGE = 3;
-	private final Item FRUIT_ITEM;
+	private final String FRUIT_ID;
+	private final boolean VANILLA_FRUIT;
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	private static final float growthSpeed = 3.0f;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public FloweringLeavesBlock(Item fruit, Properties properties) {
+	public FloweringLeavesBlock(String fruitId, boolean fruitIsVanilla, Properties properties) {
 		super(properties);
-		this.FRUIT_ITEM = fruit;
+		this.FRUIT_ID = fruitId;
+		this.VANILLA_FRUIT = fruitIsVanilla;
 		this.registerDefaultState(
 				this.stateDefinition.any()
 						.setValue(
@@ -149,6 +156,20 @@ public class FloweringLeavesBlock extends LeavesBlock {
 		@NotNull Player player,
 		@NotNull BlockHitResult hit
 	) {
+
+		Item fruitItem;
+
+		if(VANILLA_FRUIT){
+			fruitItem = BuiltInRegistries.ITEM.get(
+				ResourceLocation.fromNamespaceAndPath(
+					"minecraft",
+					FRUIT_ID
+				)
+			);
+		} else {
+			fruitItem = ITEM_MAP.get(FRUIT_ID).get();
+		}
+
 		if (getAge(currentBlockState) == getMaxAge()) {
 			Direction hitDirection = hit.getDirection();
 			BlockPos spawnApplePos = blockPos.relative(hitDirection);
@@ -161,8 +182,8 @@ public class FloweringLeavesBlock extends LeavesBlock {
 					spawnApplePos.getX() + 0.5,
 					spawnApplePos.getY() + 0.5,
 					spawnApplePos.getZ() + 0.5,
-					new ItemStack(FRUIT_ITEM, 1));
-			droppedFruit.spawnAtLocation(FRUIT_ITEM,0);
+					new ItemStack(fruitItem, 1));
+			droppedFruit.spawnAtLocation(fruitItem,0);
 			//ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(Items.APPLE));
 			// then set blockstate back to 1
 			serverLevel.setBlock(

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "applesaplings:orange_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "applesaplings:orange_button"
+  }
+}
