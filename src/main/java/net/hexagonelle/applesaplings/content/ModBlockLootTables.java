@@ -125,12 +125,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 		this.dropSelf(signBlock);
 		this.dropSelf(hangingSignBlock);
 		this.dropSelf(stairsBlock);
-		this.dropSelf(slabBlock);
+		this.add(slabBlock, block -> createSlabItemTable(slabBlock));
 		this.dropSelf(buttonBlock);
 		this.dropSelf(pressurePlateBlock);
 		this.dropSelf(fenceBlock);
 		this.dropSelf(fenceGateBlock);
-		this.dropSelf(doorBlock);
+		this.add(doorBlock,block-> createDoorTable(doorBlock));
 		this.dropSelf(trapDoorBlock);
 		this.add(wallSignBlock, block -> createSingleItemTable(signItem));
 		this.add(wallHangingSignBlock, block -> createSingleItemTable(hangingSignItem));

@@ -1,10 +1,41 @@
 package net.hexagonelle.applesaplings.modclasses.worldgen;
 
-//// CURRENTLY UNUSED ////
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import org.jetbrains.annotations.NotNull;
 
-//public class AppleFoliagePlacer extends CherryFoliagePlacer {
-//
-//
+//// CURRENTLY UNTESTED ////
+
+public class SphereFoliagePlacer extends FoliagePlacer {
+	public SphereFoliagePlacer(IntProvider radius, IntProvider offset) {
+		super(radius, offset);
+	}
+
+	@Override
+	protected @NotNull FoliagePlacerType<?> type() {
+		return null;
+	}
+
+	@Override
+	protected void createFoliage(LevelSimulatedReader levelSimulatedReader, FoliageSetter foliageSetter, RandomSource randomSource, TreeConfiguration treeConfiguration, int i, FoliageAttachment foliageAttachment, int i1, int i2, int i3) {
+
+	}
+
+	@Override
+	public int foliageHeight(RandomSource randomSource, int i, TreeConfiguration treeConfiguration) {
+		return 0;
+	}
+
+	@Override
+	protected boolean shouldSkipLocation(RandomSource randomSource, int i, int i1, int i2, int i3, boolean b) {
+		return false;
+	}
+
+
 //	public static final MapCodec<AppleFoliagePlacer> CODEC =
 //		RecordCodecBuilder.mapCodec(
 //			foliagePlacerInstance -> foliagePlacerParts(foliagePlacerInstance)
@@ -96,5 +127,5 @@ package net.hexagonelle.applesaplings.modclasses.worldgen;
 //	){
 //		return false;
 //	}
-//
-//}
+
+}

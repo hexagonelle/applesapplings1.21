@@ -15,13 +15,17 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static net.hexagonelle.applesaplings.content.registers.BlockRegistry.BLOCK_MAP;
 
@@ -37,18 +41,24 @@ public class TreeFeatureRegistry {
 	public static final HashMap<String, ResourceKey<ConfiguredFeature<?, ?>>> TREE_FEATURES_MAP =
 		new LinkedHashMap<>();
 
-	public static TreeConfiguration.TreeConfigurationBuilder createFloweringBlobTree(String woodTypeId){
+	public static TreeConfiguration.TreeConfigurationBuilder createFloweringBlobTree(
+		String woodTypeId,
+		Supplier<TrunkPlacer> trunkFunction,
+		Supplier<FoliagePlacer> foliageFunction
+		){
 
 		Block logBlock = BLOCK_MAP.get(woodTypeId + "_log").get();
 		Block leavesBlock = BLOCK_MAP.get(woodTypeId + "_leaves").get();
-		IntProvider foliageRadius = ConstantInt.of(3);
-		IntProvider foliageOffset = ConstantInt.of(0);
+//		IntProvider foliageRadius = ConstantInt.of(3);
+//		IntProvider foliageOffset = ConstantInt.of(0);
 
 		return new TreeConfiguration.TreeConfigurationBuilder(
 			BlockStateProvider.simple(logBlock),
-			new StraightTrunkPlacer(5,2,1),
+//			new StraightTrunkPlacer(5,2,1),
+			trunkFunction.get(),
 			BlockStateProvider.simple(leavesBlock),
-			new BlobFoliagePlacer(foliageRadius,foliageOffset,3),
+//			new BlobFoliagePlacer(foliageRadius,foliageOffset,3),
+			foliageFunction.get(),
 			new TwoLayersFeatureSize(1,0,2)
 		);
 
@@ -72,6 +82,8 @@ public class TreeFeatureRegistry {
 	public static void createFloweringTree(
 		BootstrapContext<ConfiguredFeature<?,?>> context,
 		String woodTypeId,
+		Supplier<TrunkPlacer> trunkFunction,
+		Supplier<FoliagePlacer> foliageFunction,
 		ResourceKey<ConfiguredFeature<?, ?>> treeFeature
 	){
 
@@ -80,7 +92,11 @@ public class TreeFeatureRegistry {
 
 		FeatureUtils.register(
 			context, treeFeature, Feature.TREE,
-			createFloweringBlobTree(woodTypeId)
+			createFloweringBlobTree(
+				woodTypeId,
+				trunkFunction,
+				foliageFunction
+			)
 				.decorators(floweringDecoratorList)
 				.build()
 		);

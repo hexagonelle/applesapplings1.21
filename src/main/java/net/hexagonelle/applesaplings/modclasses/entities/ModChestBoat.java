@@ -41,13 +41,13 @@ public class ModChestBoat extends ChestBoat {
 	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
 		super.defineSynchedData(builder);
 
-		for(ModBoat.Type type : ModBoat.Type.values()){
-			builder.define(DATA_ID_TYPE,type.ordinal());
-		}
+//		for(ModBoat.Type type : ModBoat.Type.values()){
+//			builder.define(DATA_ID_TYPE,type.ordinal());
+//		}
 
 		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
-
-		builder.define(DATA_ID_TYPE,getModVariant().ordinal());
+//		builder.define(DATA_ID_TYPE, ModBoat.Type.ORANGE.ordinal());
+//		builder.define(DATA_ID_TYPE,getModVariant().ordinal());
 
 	};
 

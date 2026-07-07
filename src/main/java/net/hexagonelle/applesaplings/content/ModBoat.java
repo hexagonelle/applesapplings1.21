@@ -10,6 +10,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,11 @@ import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.ITEM_
 
 public class ModBoat extends Boat {
 
+	public @NotNull Item getDropItem() {
+//		return getModVariant().boatItem.get();
+		return ITEM_MAP.get(getModVariant().name + "_boat").get();
+	}
+
 	public enum Type implements StringRepresentable {
 		APPLE("apple"),
 		ORANGE("orange");
@@ -30,7 +36,7 @@ public class ModBoat extends Boat {
 
 
 
-		private final String name;
+		public final String name;
 		private final Supplier<Block> planksSupplier;
 		final Supplier<Item> boatItem;
 		public final Supplier<Item> chestBoatItem;
@@ -40,8 +46,11 @@ public class ModBoat extends Boat {
 		Type(String woodTypeId){
 
 			Supplier<Block> planks = BLOCK_MAP.get(woodTypeId + "_planks");
-			Supplier<Item> boatItem = ITEM_MAP.get(woodTypeId + "_boat");
-			Supplier<Item> chestBoatItem = ITEM_MAP.get(woodTypeId + "_chest_boat");
+//			Supplier<Item> boatItem = ITEM_MAP.get(woodTypeId + "_boat");
+//			Supplier<Item> chestBoatItem = ITEM_MAP.get(woodTypeId + "_chest_boat");
+
+			Supplier<Item> boatItem = () -> Items.AIR;
+			Supplier<Item> chestBoatItem = () -> Items.AIR;
 
 			this.name = woodTypeId;
 			this.planksSupplier = planks;
@@ -104,7 +113,12 @@ public class ModBoat extends Boat {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
 		super.defineSynchedData(builder);
+
 		builder.define(DATA_ID_TYPE, ModBoat.Type.APPLE.ordinal());
+//		builder.define(DATA_ID_TYPE, ModBoat.Type.ORANGE.ordinal());
+
+//		builder.define(DATA_ID_TYPE,getModVariant().ordinal());
+
 	};
 
 	public void setVariant(Type variant) {
@@ -113,10 +127,6 @@ public class ModBoat extends Boat {
 
 	public Type getModVariant() {
 		return Type.byId(this.entityData.get(DATA_ID_TYPE));
-	}
-
-	public @NotNull Item getDropItem() {
-		return getModVariant().boatItem.get();
 	}
 
 }

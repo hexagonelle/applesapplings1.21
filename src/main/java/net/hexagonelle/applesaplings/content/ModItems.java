@@ -2,6 +2,7 @@ package net.hexagonelle.applesaplings.content;
 
 import net.hexagonelle.applesaplings.content.suppliers.ItemSuppliers;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import static net.hexagonelle.applesaplings.content.registers.ItemRegistry.*;
@@ -14,5 +15,6 @@ public class ModItems {
 		registerFruitItem("orange","Orange","applesaplings_tab");
 		registerBoatItem("orange","Orange", ModBoat.Type.ORANGE,"applesaplings_tab");
 		registerChestBoatItem("orange","Orange", ModBoat.Type.ORANGE,"applesaplings_tab");
+
 	}
 }
