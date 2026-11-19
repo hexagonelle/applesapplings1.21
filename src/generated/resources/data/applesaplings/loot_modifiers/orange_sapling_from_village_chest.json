@@ -1,0 +1,10 @@
+{
+  "type": "applesaplings:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/village/village_fisher"
+    }
+  ],
+  "item": "applesaplings:orange_sapling"
+}

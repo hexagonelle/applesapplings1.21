@@ -64,6 +64,12 @@ public class DataGenerators {
 			new ModDataMapProvider(packOutput,lookupProvider)
 		);
 
+
+		generator.addProvider(
+			event.includeServer(),
+			new ModGlobalLootModifierProvider(packOutput, lookupProvider)
+		);
+
 	}
 
 }

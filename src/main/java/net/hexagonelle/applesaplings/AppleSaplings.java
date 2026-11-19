@@ -1,5 +1,6 @@
 package net.hexagonelle.applesaplings;
 
+import net.hexagonelle.applesaplings.content.ModLootModifiers;
 import net.hexagonelle.applesaplings.content.registers.BlockRegistry;
 import net.hexagonelle.applesaplings.content.registers.CreativeTabRegistry;
 import net.hexagonelle.applesaplings.content.registers.EntityTypeRegistry;
@@ -55,6 +56,8 @@ public class AppleSaplings {
         EntityTypeRegistry.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tree decorator types get registered
         ModTreeDecoratorType.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so loot modifiers get registered????
+        ModLootModifiers.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (AppleSaplings) to respond directly to events.
